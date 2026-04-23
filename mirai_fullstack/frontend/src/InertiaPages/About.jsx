@@ -136,18 +136,37 @@ export default function About() {
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-16">
             {[
-              { role: 'Chairman', name: 'Dr. Vikram Singh', msg: 'Our goal is to create a legacy of learners who are not just academically brilliant, but humanely compassionate.' },
-              { role: 'Managing Director', name: 'Mrs. Anjali Mehta', msg: 'We bridge the gap between traditional excellence and modern innovation to provide a truly global education.' },
-              { role: 'Principal', name: 'Dr. Sarah Thompson', msg: 'Every child at Mirai is seen, heard, and encouraged to explore their unique potential in a supportive environment.' },
+              { role: 'Chairman Sir', name: 'Dr. KP Singh', image: '/chairmansir_photo.jpeg', msg: 'Our goal is to create a legacy of learners who are not just academically brilliant, but humanely compassionate.' },
+              { role: 'Managing Director', name: 'Siddhant Singh', image: null, msg: 'We bridge the gap between traditional excellence and modern innovation to provide a truly global education.' },
+              { role: 'Principal', name: 'Pankaj Kumar', image: '/principal_sir_photo.jpeg', msg: 'Every child at Mirai is seen, heard, and encouraged to explore their unique potential in a supportive environment.' },
             ].map((leader, i) => (
               <div key={i} className="flex flex-col">
                 <div className="mb-6 relative group">
-                  <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-stone-800">
-                    <img src={`https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80&auto=format&sep=${i}`} 
-                         alt={leader.name} className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500" />
-                  </div>
-                  <div className="absolute -bottom-4 right-6 bg-terracotta text-white px-4 py-2 rounded-lg font-display font-bold text-xs uppercase tracking-widest" style={{ background: B }}>
-                    {leader.role}
+                  <div className="aspect-[3/4] rounded-3xl overflow-hidden bg-stone-800 shadow-2xl relative">
+                    {leader.image ? (
+                      <img 
+                        src={leader.image} 
+                        alt={leader.name} 
+                        className="w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-110 group-hover:rotate-1" 
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex flex-col items-center justify-center bg-stone-800 border-2 border-dashed border-stone-700">
+                        <div className="w-20 h-20 rounded-full bg-stone-700/50 flex items-center justify-center mb-4">
+                          <svg className="w-10 h-10 text-stone-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                          </svg>
+                        </div>
+                        <span className="text-stone-500 font-display font-bold text-xs uppercase tracking-widest">Coming Soon</span>
+                      </div>
+                    )}
+                    {/* Role Badge Overlay */}
+                    <div className="absolute bottom-6 left-6 bg-white text-stone-900 px-4 py-2 rounded-xl font-display font-bold text-[10px] uppercase tracking-widest shadow-xl z-20"
+                         style={{ color: '#1C1917' }}>
+                      {leader.role}
+                    </div>
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent opacity-60" />
                   </div>
                 </div>
                 <h4 className="font-display font-800 text-xl mb-3">{leader.name}</h4>
