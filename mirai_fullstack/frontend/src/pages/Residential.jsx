@@ -92,7 +92,7 @@ export default function Residential() {
               </div>
             </div>
             <div className="rounded-3xl overflow-hidden aspect-[4/3] relative shadow-2xl">
-              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=85&auto=format"
+              <img src="/mirai_school6_image.jpeg"
                 alt="Students in boarding at Mirai Residential School with IB curriculum"
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
               <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(45,18,16,0.4) 0%, transparent 60%)' }} />

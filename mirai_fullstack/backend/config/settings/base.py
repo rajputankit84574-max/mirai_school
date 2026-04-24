@@ -12,6 +12,9 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 _hosts = config('ALLOWED_HOSTS', default='miraischool.in,localhost,127.0.0.1').split(',')
 ALLOWED_HOSTS = [h.strip() for h in _hosts if h.strip()]
 
+# ── SOCIAL MEDIA & URLS ─────────────────────────────
+SITE_URL = config('SITE_URL', default='https://miraischool.in')
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

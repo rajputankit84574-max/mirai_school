@@ -93,8 +93,8 @@ export default function Campus() {
             </div>
             <div className="space-y-4">
               <div className="rounded-3xl overflow-hidden aspect-[4/3] relative shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=85&auto=format"
-                  alt="Mirai Experiential School green campus modern infrastructure"
+                <img src="/mirai_activity_3_image.jpeg"
+                  alt="Mirai Experiential School green campus modern infrastructure and activity spaces"
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(20,10,8,0.4) 0%, transparent 60%)' }} />
                 <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg">
@@ -126,8 +126,8 @@ export default function Campus() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="rounded-3xl overflow-hidden aspect-[4/3] relative shadow-2xl">
-              <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=85&auto=format"
-                alt="Smart technology-enabled classrooms at Mirai"
+              <img src="/mirai_school4_image.jpeg"
+                alt="Smart technology-enabled classrooms at Mirai Experiential School"
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
               <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(20,10,8,0.4) 0%, transparent 60%)' }} />
               <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg">
@@ -268,8 +268,8 @@ export default function Campus() {
             </div>
             <div className="space-y-4">
               <div className="rounded-3xl overflow-hidden aspect-[4/3] relative shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85&auto=format"
-                  alt="Mirai campus safety and security surveillance system"
+                <img src="/mirai_activity_book_image.jpeg"
+                  alt="Safe and secure learning environment at Mirai Experiential School"
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(20,10,8,0.4) 0%, transparent 60%)' }} />
                 <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg">

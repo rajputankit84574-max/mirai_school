@@ -54,8 +54,8 @@ export default function About() {
               </div>
             </div>
             <div className="rounded-3xl overflow-hidden aspect-[4/5] relative shadow-2xl">
-              <img src="/about-collaborative.png"
-                alt="Students collaborating on an innovation project in a modern school lab"
+              <img src="/mirai_reception2_image.jpeg"
+                alt="Mirai Experiential School modern reception and welcoming area"
                 className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-900/60 to-transparent" />
               <div className="absolute bottom-8 left-8 right-8 text-white">

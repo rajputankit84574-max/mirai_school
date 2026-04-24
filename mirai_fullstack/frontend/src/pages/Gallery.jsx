@@ -8,38 +8,40 @@ const B = '#AA4A44', F = '#77966D'
 
 const photos = [
   /* ── Campus ─────────────────────────────────────────── */
-  { cat: 'Campus', title: 'Main Campus Building',       caption: 'State-of-the-art infrastructure built for inspired learning',      url: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=900&q=80&auto=format', span: 'tall' },
-  { cat: 'Campus', title: 'Campus Architecture',        caption: 'Contemporary design blending with nature',                          url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=900&q=80&auto=format' },
-  { cat: 'Campus', title: 'Green Campus Grounds',       caption: 'Expansive green campus encouraging outdoor exploration',            url: 'https://images.unsplash.com/photo-1562774053-701939374585?w=900&q=80&auto=format' },
-  { cat: 'Campus', title: 'School Library',             caption: '15,000+ titles across disciplines for curious readers',             url: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=900&q=80&auto=format' },
-  { cat: 'Campus', title: 'Learning Corridor',          caption: 'Every space at Mirai is designed to inspire',                       url: 'https://images.unsplash.com/photo-1519311965067-36d3e5f33d39?w=900&q=80&auto=format', span: 'wide' },
+  { cat: 'Campus', title: 'Main Academic Block',       caption: 'State-of-the-art infrastructure built for inspired learning',      url: '/mirai_school2_image.jpeg', span: 'tall' },
+  { cat: 'Campus', title: 'Modern Architecture',        caption: 'Contemporary design blending with nature',                          url: '/mirai_school3_image.jpeg' },
+  { cat: 'Campus', title: 'Green Campus Vista',       caption: 'Expansive green campus encouraging outdoor exploration',            url: '/mirai_school5_image.jpeg' },
+  { cat: 'Campus', title: 'Secondary Wing',             caption: 'Dedicated spaces for higher secondary research and learning',       url: '/mirai_school7_image.jpeg' },
+  { cat: 'Campus', title: 'Interactive Corridors',      caption: 'Every space at Mirai is designed to inspire curiosity',             url: '/mirai_coridor2_image.jpeg', span: 'wide' },
+  { cat: 'Campus', title: 'Campus Pathway',             caption: 'Seamless connectivity across learning zones',                       url: '/mirai_coridor4_image.jpeg' },
 
   /* ── Residential Life ────────────────────────────────── */
-  { cat: 'Residential Life', title: 'Boarding House',           caption: 'Safe, warm, and home-like residential spaces',                url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=900&q=80&auto=format', span: 'tall' },
-  { cat: 'Residential Life', title: 'Student Dormitory',        caption: 'Comfortable and structured boarding rooms for every student',  url: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=900&q=80&auto=format' },
-  { cat: 'Residential Life', title: 'Common Room',              caption: 'Community spaces for relaxation, bonding, and creativity',      url: 'https://images.unsplash.com/photo-1484820540004-14229fe36ca4?w=900&q=80&auto=format' },
-  { cat: 'Residential Life', title: 'Evening Study Hall',       caption: 'Structured evening study with dedicated mentor support',        url: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=900&q=80&auto=format' },
-  { cat: 'Residential Life', title: 'Dining Hall',              caption: 'Nutritional, balanced meals served in a vibrant community hall', url: 'https://images.unsplash.com/photo-1567521464027-f127ff144326?w=900&q=80&auto=format', span: 'wide' },
+  { cat: 'Residential Life', title: 'Boarding House Exterior',   caption: 'Safe, warm, and home-like residential spaces',                url: '/mirai_school6_image.jpeg', span: 'tall' },
+  { cat: 'Residential Life', title: 'Welcoming Reception',        caption: '24/7 dedicated support for our residential family',           url: '/mirai_reception_image.jpeg' },
+  { cat: 'Residential Life', title: 'Lobby & Lounge',            caption: 'Community spaces for relaxation and social bonding',          url: '/mirai_reception4_image.jpeg' },
+  { cat: 'Residential Life', title: 'Parent Lounge',              caption: 'Comfortable spaces for visiting families and interactions',   url: '/mirai_reception5_image.jpeg' },
+  { cat: 'Residential Life', title: 'Residential Services',       caption: 'Hygienic and professionally managed student facilities',       url: '/mirai_reception6_image.jpeg', span: 'wide' },
 
   /* ── Sports ──────────────────────────────────────────── */
-  { cat: 'Sports', title: 'Sports Arena',              caption: 'Olympic-standard outdoor fields for multiple sports',               url: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&q=80&auto=format', span: 'tall' },
-  { cat: 'Sports', title: 'Basketball Court',          caption: 'Full-size indoor and outdoor basketball facilities',                 url: 'https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=900&q=80&auto=format' },
-  { cat: 'Sports', title: 'Martial Arts Training',     caption: 'Taekwondo, self-defence, and fencing programmes for all ages',      url: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80&auto=format' },
-  { cat: 'Sports', title: 'Athletics & Fitness',       caption: 'Professional gym and fitness training facilities on campus',        url: 'https://images.unsplash.com/photo-1517960413843-0aee8e2b3285?w=900&q=80&auto=format' },
-  { cat: 'Sports', title: 'Swimming & Aquatics',       caption: 'Aquatics centre offering swimming training and water sports',       url: 'https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=900&q=80&auto=format', span: 'wide' },
+  { cat: 'Sports', title: 'Multi-Sport Arena',         caption: 'Olympic-standard outdoor fields for multiple sports',               url: '/mirai_sports_image.jpeg', span: 'tall' },
+  { cat: 'Sports', title: 'Cricket Grounds',           caption: 'Professional turf and practice nets for young cricketers',          url: '/mirai_playground2_image.jpeg' },
+  { cat: 'Sports', title: 'Main Playground',           caption: 'Expansive fields for athletics, football, and team sports',         url: '/mirai_playground3_image.jpeg' },
+  { cat: 'Sports', title: 'Sports Infrastructure',      caption: 'High-performance facilities integrated with the IB curriculum',      url: '/mirai_playground4_image.jpeg', span: 'wide' },
 
   /* ── Classroom Learning ──────────────────────────────── */
-  { cat: 'Classroom Learning', title: 'Collaborative Learning',  caption: 'Students learn best when they explore together',              url: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=900&q=80&auto=format', span: 'tall' },
-  { cat: 'Classroom Learning', title: 'Science Laboratory',      caption: 'Hands-on experiments in fully equipped science labs',         url: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=900&q=80&auto=format' },
-  { cat: 'Classroom Learning', title: 'AI & Robotics Lab',       caption: 'Cutting-edge tools for machine learning and IoT projects',    url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80&auto=format' },
-  { cat: 'Classroom Learning', title: 'Smart Classrooms',        caption: 'Technology-enabled learning with AR, VR, and interactive tools', url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=900&q=80&auto=format' },
-  { cat: 'Classroom Learning', title: 'Student Presentations',   caption: 'Building confidence through public speaking and research',    url: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&q=80&auto=format', span: 'wide' },
+  { cat: 'Classroom Learning', title: 'Collaborative Study',     caption: 'Students learn best when they explore and inquiry together',  url: '/mirai_activity_book_image.jpeg', span: 'tall' },
+  { cat: 'Classroom Learning', title: 'Academic Research',       caption: 'Developing critical thinking through independent inquiry',    url: '/mirai_activity_book2_image.jpeg' },
+  { cat: 'Classroom Learning', title: 'Innovation Lab',          caption: 'Hands-on experimentation in our modern activity rooms',       url: '/mirai_activityroom_image.jpeg' },
+  { cat: 'Classroom Learning', title: 'Primary Discovery Zone',  caption: 'Nurturing curiosity in our younger learners',                 url: '/mirai_activityroom2_image.jpeg' },
+  { cat: 'Classroom Learning', title: 'Smart Technology',        caption: 'Technology-enabled learning with interactive tools',          url: '/mirai_school4_image.jpeg', span: 'wide' },
 
-  /* ── Events ──────────────────────────────────────────── */
-  { cat: 'Events', title: 'Annual Cultural Festival',  caption: '"Verve 2026" — 35+ cultures celebrate on one stage',                url: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=900&q=80&auto=format', span: 'tall' },
-  { cat: 'Events', title: 'Research Symposium',        caption: 'MYP students present original research to industry professionals',  url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=900&q=80&auto=format' },
-  { cat: 'Events', title: 'Sports Day & Awards',       caption: 'Celebrating athletic excellence across all disciplines',             url: 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=900&q=80&auto=format' },
-  { cat: 'Events', title: 'Debate Championship',       caption: 'Students argue, reason, and inspire from the podium',              url: 'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=900&q=80&auto=format', span: 'wide' },
+  /* ── Events (Coming Soon) ────────────────────────────── */
+  // { cat: 'Events', title: 'Student Showcases',         caption: 'Celebrating achievement and talent across all grades',              url: '/mirai_activity_3_image.jpeg', span: 'tall' },
+  // { cat: 'Events', title: 'Cultural Festival',         caption: 'Annual celebrations of global heritage and diversity',              url: '/mirai_activity_4_image.jpeg' },
+  // { cat: 'Events', title: 'Science Symposium',         caption: 'Presenting original research and innovative solutions',               url: '/mirai_activity_5_image.jpeg' },
+  // { cat: 'Events', title: 'Annual Day',                caption: 'Grand stage performances by the Mirai student body',                url: '/mirai_activity_7_image.jpeg' },
+  // { cat: 'Events', title: 'Expert-Led Skill Workshops', caption: 'Interactive sessions focused on developing future-ready skills',     url: '/mirai_activity_8.jpeg' },
+  // { cat: 'Events', title: 'Award Ceremony',            caption: 'Recognising excellence in academics, sports, and arts',             url: '/mirai_activity_9_image.jpeg', span: 'wide' },
 ]
 
 const CATS = ['All', 'Campus', 'Residential Life', 'Sports', 'Classroom Learning', 'Events']
@@ -105,7 +107,7 @@ export default function Gallery() {
                   border: `1.5px solid ${active === cat ? B : '#E7E5E3'}`,
                   fontFamily: 'var(--font-display)',
                 }}>
-                {cat === 'All' ? `🖼️ All (${photos.length})` : `${cat} (${photos.filter(p => p.cat === cat).length})`}
+                {cat === 'All' ? `🖼️ All (${photos.length})` : cat === 'Events' ? `${cat} (Coming Soon)` : `${cat} (${photos.filter(p => p.cat === cat).length})`}
               </button>
             ))}
           </div>
@@ -172,9 +174,16 @@ export default function Gallery() {
           </div>
 
           {filtered.length === 0 && (
-            <div className="text-center py-24">
-              <div className="text-5xl mb-4">🖼️</div>
-              <p className="text-base" style={{ color: '#78716C' }}>No photos in this category yet.</p>
+            <div className="text-center py-32 bg-white rounded-3xl border border-dashed border-stone-200">
+              <div className="text-6xl mb-6">📅</div>
+              <h3 className="text-2xl font-display font-800 mb-2" style={{ color: '#1C1917', fontFamily: 'var(--font-display)', fontWeight: 800 }}>
+                {active === 'Events' ? 'Events Coming Soon' : 'No Photos Yet'}
+              </h3>
+              <p className="text-base max-w-md mx-auto" style={{ color: '#78716C' }}>
+                {active === 'Events' 
+                  ? 'Our event gallery is currently being curated. We look forward to sharing our vibrant school celebrations with you shortly.' 
+                  : 'We are currently updating our gallery for this category. Please check back soon.'}
+              </p>
             </div>
           )}
         </div>

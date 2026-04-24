@@ -39,64 +39,69 @@ function Hero() {
       <div className="absolute bottom-0 inset-x-0 h-48"
            style={{ background:'linear-gradient(to top, rgba(255,255,255,0.06), transparent)' }}/>
 
-      <div className="relative max-w-7xl mx-auto px-6 w-full py-20">
+      <div className="relative max-w-7xl mx-auto px-6 w-full flex flex-col justify-center min-h-[calc(100vh-141px)] py-16">
 
         {/* ── Top flex row: left text | right images ── */}
-        <div className="flex items-start gap-12 mb-10">
+        <div className="flex flex-col mb-12 pt-12">
 
-          {/* Left: badge → h1 → p → buttons */}
-          <div className="flex-1 min-w-0">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase mb-8"
-                 style={{ background:'rgba(255,255,255,0.12)', border:'1px solid rgba(255,255,255,0.25)', color:'white', fontFamily:'var(--font-display)' }}>
-              <img src="/icon.png" alt="" style={{ height:16, width:16, filter:'brightness(10)', opacity:0.8 }} decoding="async" />
-              IB World School
-            </div>
+          {/* Top Level: Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase mb-8 self-start"
+               style={{ background:'rgba(255,255,255,0.12)', border:'1px solid rgba(255,255,255,0.25)', color:'white', fontFamily:'var(--font-display)' }}>
+            <img src="/icon.png" alt="" style={{ height:16, width:16, filter:'brightness(10)', opacity:0.8 }} decoding="async" />
+            IB World School
+          </div>
 
-            <h1 className="font-display leading-tight mb-6 text-white"
-                style={{ fontFamily:'var(--font-display)', fontWeight:900, fontSize:'clamp(2rem,3.5vw,3.2rem)' }}>
-              Mirai Experiential School – <br/>
-              <span style={{ color:'#AFBFAA' }}>A Future-Ready International Learning Environment</span>
+          {/* Row: Heading and Adjacent Images */}
+          <div className="flex items-stretch gap-12 mb-10">
+            <h1 className="font-display leading-tight text-white flex-1 flex items-center"
+                style={{ fontFamily:'var(--font-display)', fontWeight:900, fontSize:'clamp(2.4rem, 4.5vw, 4rem)' }}>
+              <span>
+                Mirai Experiential School – <br/>
+                <span style={{ color:'#AFBFAA' }}>A Future-Ready International Learning Environment</span>
+              </span>
             </h1>
 
-            <p className="text-lg leading-relaxed mb-10"
-               style={{ color:'rgba(255,255,255,0.72)', maxWidth:520, fontFamily:'var(--font-body)' }}>
+            {/* Right: Height-matched Image Grid */}
+            <div className="hidden xl:grid grid-cols-2 gap-3 flex-shrink-0 w-[45%] h-auto">
+              <div className="rounded-2xl overflow-hidden row-span-2 relative shadow-xl border border-white/10">
+                <img src="/mirai_school5_image.jpeg"
+                     alt="Modern school campus building exterior"
+                     className="w-full h-full object-cover" decoding="async" />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.3), transparent)' }} />
+              </div>
+              <div className="rounded-2xl overflow-hidden relative shadow-xl border border-white/10">
+                <img src="/mirai_coridor3_image.jpeg"
+                     alt="Modern school corridor and learning spaces"
+                     className="w-full h-full object-cover" decoding="async" />
+                <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.25)' }} />
+              </div>
+              <div className="rounded-2xl overflow-hidden relative shadow-xl border border-white/10">
+                <img src="/mirai_sports_image.jpeg"
+                     alt="Students playing football on school sports ground"
+                     className="w-full h-full object-cover" decoding="async" />
+                <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.25)' }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Description & Buttons */}
+          <div className="max-w-2xl">
+            <p className="text-lg md:text-xl leading-relaxed mb-10"
+               style={{ color:'rgba(255,255,255,0.85)', maxWidth:600, fontFamily:'var(--font-body)' }}>
               Experience a transformative IB education where students excel through hands-on experiential learning, world-class sports, and a nurturing residential campus.
             </p>
 
-            {/* Audit §4.2: CTA buttons → "Enroll Now" + "Book Free Demo" */}
             <div className="flex flex-wrap gap-4">
               <Link to="/student-inquiry#academic-session-header"
-                className="btn btn-lg"
+                className="btn btn-lg px-8"
                 style={{ background:'white', color:B, fontFamily:'var(--font-display)', fontWeight:800, textDecoration:'none' }}>
                 Enroll Now →
               </Link>
               <Link to="/contact"
-                className="btn btn-ghost-white btn-lg"
+                className="btn btn-ghost-white btn-lg px-8"
                 style={{ textDecoration:'none' }}>
                 Book Free Demo
               </Link>
-            </div>
-          </div>
-
-          {/* Right: image grid — auto height, stops at button level */}
-          <div className="hidden xl:grid grid-cols-2 gap-3 flex-shrink-0" style={{ width:'42%' }}>
-            <div className="rounded-2xl overflow-hidden row-span-2 relative" style={{ minHeight:180 }}>
-              <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=75&auto=format"
-                   alt="Modern school campus building exterior"
-                   className="w-full h-full object-cover" decoding="async" />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.4), transparent)' }} />
-            </div>
-            <div className="rounded-2xl overflow-hidden relative" style={{ minHeight:80 }}>
-              <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?w=400&q=75&auto=format"
-                   alt="Students working in STEM science laboratory"
-                   className="w-full h-full object-cover" decoding="async" />
-              <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.35)' }} />
-            </div>
-            <div className="rounded-2xl overflow-hidden relative" style={{ minHeight:80 }}>
-              <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400&q=75&auto=format"
-                   alt="Students playing football on school sports ground"
-                   className="w-full h-full object-cover" decoding="async" />
-              <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.35)' }} />
             </div>
           </div>
         </div>
@@ -304,12 +309,12 @@ function FeatureSplit({ label, title, body, bullets, cta, ctaTo, visual, reverse
         {/* ADDED IMAGE: Feature section contextual photo */}
         <div className="rounded-3xl overflow-hidden aspect-[4/3] relative">
           <img
-            src={forest
-              ? "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=75&auto=format"
-              : "/sports-training-premium.png"}
-            alt={forest ? "Students doing hands-on project-based learning in classroom" : "Students training on school sport field"}
+            src={visual || (forest 
+              ? "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=75&auto=format" 
+              : "/sports-training-premium.png")}
+            alt={title}
             className="w-full h-full object-cover"
-          decoding="async" />
+            decoding="async" />
           <div className="absolute inset-0" style={{ background: forest ? 'rgba(26,43,23,0.35)' : 'rgba(45,18,16,0.35)' }} />
           <div className="absolute bottom-5 left-5 bg-white/95 rounded-2xl px-4 py-3 shadow-lg">
             <div className="text-xs font-bold" style={{ color:'#1C1917', fontFamily:'var(--font-display)' }}>
@@ -465,7 +470,7 @@ export default function Home() {
             ]}
             cta="Explore Experiential Learning"
             ctaTo="/experiential-learning"
-            visual="🌿"
+            visual="/mirai_school_image.jpeg"
           />
         </div>
       </section>
@@ -485,7 +490,7 @@ export default function Home() {
             ]}
             cta="See Sports Facilities"
             ctaTo="/sports"
-            visual="🏆"
+            visual="/mirai_sports_image.jpeg"
           />
         </div>
       </section>

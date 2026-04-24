@@ -192,8 +192,8 @@ export default function Experiential() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="rounded-3xl overflow-hidden aspect-[4/3] relative shadow-2xl">
-              <img src="https://images.unsplash.com/photo-1576319155264-99536e0be1ee?w=800&q=85&auto=format"
-                alt="Students engaged in academic research at Mirai"
+              <img src="/mirai_playground4_image.jpeg"
+                alt="Students engaged in academic research and inquiry at Mirai Experiential School"
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
               <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(20,10,8,0.5) 0%, transparent 60%)' }} />
               <div className="absolute bottom-6 left-6 bg-white/95 rounded-2xl px-4 py-3 shadow-lg">

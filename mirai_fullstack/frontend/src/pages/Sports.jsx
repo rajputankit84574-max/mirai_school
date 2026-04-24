@@ -89,7 +89,7 @@ export default function Sports() {
               </div>
             </div>
             <div className="rounded-3xl overflow-hidden aspect-[4/3] relative shadow-2xl">
-              <img src="/sports-philosophy.png"
+              <img src="/mirai_playground4_image.jpeg"
                 alt="Students engaged in high-performance sports training at Mirai campus"
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
               <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(20,10,8,0.5) 0%, transparent 60%)' }} />

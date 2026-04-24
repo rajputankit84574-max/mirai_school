@@ -123,8 +123,8 @@ export default function StudentLife() {
             </div>
             <div className="space-y-4">
               <div className="rounded-3xl overflow-hidden aspect-[4/3] relative shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800&q=85&auto=format"
-                  alt="Students engaged in performing arts at Mirai"
+                <img src="/mirai_activity_7_image.jpeg"
+                  alt="Students engaged in performing arts and creative expression at Mirai"
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
                 <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(20,10,8,0.4) 0%, transparent 60%)' }} />
                 <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg">
