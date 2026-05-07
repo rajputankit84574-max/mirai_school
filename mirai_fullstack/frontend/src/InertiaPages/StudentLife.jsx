@@ -1,5 +1,4 @@
-import { useSEO } from '../hooks/useSEO'
-import { META, organizationSchema } from '../utils/seo'
+import { Head, Link } from '@inertiajs/react'
 import PageHero from '../components/PageHero'
 import CTABanner from '../components/CTABanner'
 import SectionHeader from '../components/SectionHeader'
@@ -61,10 +60,13 @@ const lifeStats = [
 ]
 
 export default function StudentLife() {
-  useSEO(META.studentLife, [organizationSchema()])
-
   return (
     <>
+      <Head>
+        <title>Student Life at Mirai | Clubs, Arts & Leadership</title>
+        <meta name="description" content="Explore the vibrant student life at Mirai Experiential School — 40+ clubs, arts, leadership development, and community service." />
+      </Head>
+
       <PageHero
         title="Student Life at Mirai"
         subtitle="Vibrant, purposeful, and rich with opportunity — life at Mirai is truly one of a kind."
@@ -115,7 +117,6 @@ export default function StudentLife() {
                     <span className="text-2xl">{art.icon}</span>
                     <div>
                       <p className="text-sm font-bold" style={{ color: '#1C1917', fontFamily: 'var(--font-display)' }}>{art.title}</p>
-                      <p className="text-xs mt-0.5" style={{ color: '#78716C' }}>{art.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -131,12 +132,6 @@ export default function StudentLife() {
                   <p className="text-xs font-bold" style={{ color: '#1C1917' }}>Arts & Creativity</p>
                   <p className="text-xs mt-0.5" style={{ color: '#78716C' }}>Visual, performing, and digital arts</p>
                 </div>
-              </div>
-              <div className="p-6 rounded-2xl text-center"
-                style={{ background: `linear-gradient(135deg, ${B}08, ${F}08)`, border: `1px solid ${F}20` }}>
-                <p className="text-sm font-medium" style={{ color: '#44403C' }}>
-                  🎭 Annual school productions, gallery exhibitions, and the <strong>Mirai Arts Showcase</strong> celebrate student creativity every year.
-                </p>
               </div>
             </div>
           </div>
@@ -165,15 +160,6 @@ export default function StudentLife() {
                 </div>
               </div>
             ))}
-          </div>
-          <div className="mt-12 p-8 rounded-2xl text-center"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <p className="text-white font-display font-800 text-lg mb-1">
-              👑 Leadership is not taught at Mirai — it is <span style={{ color: '#A8C79E' }}>lived every day</span>
-            </p>
-            <p className="text-sm" style={{ color: '#A8A29E' }}>
-              From classroom debates to running school councils, students take ownership of their learning and community.
-            </p>
           </div>
         </div>
       </section>
@@ -222,43 +208,6 @@ export default function StudentLife() {
         </div>
       </section>
 
-      {/* ── Section 5: School Events ──────────────────────────────────── */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionHeader center label="School Events" title="A Calendar Full of Celebration & Achievement"
-            subtitle="Every year at Mirai is marked by events that bring students together — culturally, academically, and athletically." />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-            {events.map((event, i) => (
-              <div key={i} className="bg-white rounded-2xl overflow-hidden border transition-all hover:shadow-xl hover:-translate-y-1"
-                style={{ border: '1.5px solid #F0EDEA' }}>
-                <div className="h-2" style={{ background: i % 2 === 0 ? B : F }} />
-                <div className="p-8">
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="text-3xl">{event.icon}</div>
-                    <span className="text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full"
-                      style={{ background: i % 2 === 0 ? `${B}12` : `${F}12`, color: i % 2 === 0 ? B : F }}>
-                      {event.month}
-                    </span>
-                  </div>
-                  <h4 className="font-display font-800 text-lg mb-2"
-                    style={{ color: '#1C1917', fontFamily: 'var(--font-display)', fontWeight: 800 }}>{event.title}</h4>
-                  <p className="text-sm leading-relaxed" style={{ color: '#78716C' }}>{event.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-12 p-8 rounded-2xl text-center"
-            style={{ background: `linear-gradient(135deg, ${B}06, ${F}06)`, border: `1px solid ${F}20` }}>
-            <p className="text-lg font-display font-800 mb-2" style={{ color: '#1C1917', fontFamily: 'var(--font-display)' }}>
-              🎉 Life at Mirai is never ordinary — it is always <span style={{ color: F }}>memorable</span>.
-            </p>
-            <p className="text-sm" style={{ color: '#78716C' }}>
-              Every event is student-organised, student-led, and student-celebrated — building ownership and school pride.
-            </p>
-          </div>
-        </div>
-      </section>
-
       <CTABanner
         title="Join the Mirai Community"
         subtitle="Become part of a school where every student finds their place, their passion, and their people."
@@ -268,4 +217,3 @@ export default function StudentLife() {
     </>
   )
 }
-

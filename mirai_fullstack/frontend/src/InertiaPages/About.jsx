@@ -1,7 +1,5 @@
 import { Link, Head } from '@inertiajs/react'
 import { useEffect } from 'react'
-import { useSEO } from '../hooks/useSEO'
-import { META, organizationSchema } from '../utils/seo'
 import PageHero from '../components/PageHero'
 import SectionHeader from '../components/SectionHeader'
 import CTABanner from '../components/CTABanner'
@@ -17,10 +15,12 @@ const coreValues = [
 ]
 
 export default function About() {
-  useSEO(META.about, [organizationSchema()])
-
   return (
     <>
+      <Head>
+        <title>About Mirai Experiential School | Our Vision & Values</title>
+        <meta name="description" content="Bridging the gap between knowledge and action through inquiry-driven, experiential education. Learn about our vision, mission, and core values." />
+      </Head>
       <PageHero title="About Mirai Experiential School"
         subtitle="Bridging the gap between knowledge and action through inquiry-driven, experiential education."
         breadcrumb={[{ label: 'About' }]} />

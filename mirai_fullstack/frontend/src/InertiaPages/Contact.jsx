@@ -1,7 +1,7 @@
+import { Head } from '@inertiajs/react'
 import { useState } from 'react'
 import { useSubmitEnquiry } from '../api'
-import { useSEO } from '../hooks/useSEO'
-import { META, organizationSchema } from '../utils/seo'
+import { ingestLead } from '../api/leadIngest'
 import PageHero from '../components/PageHero'
 import SectionHeader from '../components/SectionHeader'
 import CTABanner from '../components/CTABanner'
@@ -25,15 +25,13 @@ const info = [
   { icon: '💬', title: 'WhatsApp Support', detail: ADMISSIONS_PHONE_DISPLAY, sub: 'Chat with us for instant assistance', href: `https://wa.me/91${ADMISSIONS_PHONE}?text=Hi%2C%20I%27m%20interested%20in%20learning%20more%20about%20Mirai%20School.` },
 ]
 
-const EMPTY = { parent_name: '', email: '', phone: '', student_name: '', grade_applying: '', message: '' }
+const EMPTY = { parent_name: '', email: '', phone: '', student_name: '', student_dob: '', grade_applying: '', message: '', whatsapp_consent: true }
 
 const emailRe  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const mobileRe = /^\d{10}$/
 const letters  = /^[A-Za-z\s]+$/
 
 export default function Contact() {
-  useSEO(META.contact, [organizationSchema()])
-
   const [form, setForm] = useState(EMPTY)
   const [errors, setErrors] = useState({})
   const [success, setSuccess] = useState(null)
@@ -81,6 +79,17 @@ export default function Contact() {
 
     mutation.mutate(form, {
       onSuccess: data => {
+        // Lead Ingest API
+        ingestLead({
+          child_name:       form.student_name,
+          parent_name:      form.parent_name,
+          mobile_number:    form.phone,
+          email:            form.email,
+          child_dob:        form.student_dob,
+          looking_for:      form.grade_applying,
+          whatsapp_consent: form.whatsapp_consent,
+        })
+
         setSuccess(data.message || 'Your inquiry has been sent successfully!')
         setForm(EMPTY)
         setErrors({})
@@ -97,6 +106,10 @@ export default function Contact() {
 
   return (
     <>
+      <Head>
+        <title>Connect with Mirai | Contact Us</title>
+        <meta name="description" content="Experience the future of education. Book a campus tour, request a brochure, or speak with our admissions experts." />
+      </Head>
       <PageHero
         title="Connect with Mirai"
         subtitle="Experience the future of education. Book a campus tour, request a brochure, or speak with our admissions experts."
@@ -249,6 +262,11 @@ export default function Contact() {
                              style={fe.student_name ? { borderColor: B } : {}} />
                       {fe.student_name && <p className="text-[10px] font-bold text-red-500 px-1 mt-1">{fe.student_name}</p>}
                     </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold uppercase tracking-widest px-1" style={{ color: '#1C1917' }}>Student's Date of Birth</label>
+                      <input type="date" name="student_dob" value={form.student_dob} onChange={handle} 
+                             className="form-input" />
+                    </div>
                   </div>
 
                   <div className="space-y-2">
@@ -266,6 +284,17 @@ export default function Contact() {
                     <label className="text-xs font-bold uppercase tracking-widest px-1" style={{ color: '#1C1917' }}>Your Message / Questions</label>
                     <textarea name="message" value={form.message} onChange={handle} rows={4} 
                               placeholder="Tell us what you're looking for..." className="form-input" style={{ resize: 'none' }} />
+                  </div>
+
+                  <div className="py-2">
+                    <label className="flex items-center gap-3 cursor-pointer">
+                      <input type="checkbox" name="whatsapp_consent" checked={form.whatsapp_consent}
+                             onChange={e => setForm(f => ({ ...f, whatsapp_consent: e.target.checked }))}
+                             style={{ accentColor: F, width: 18, height: 18 }} />
+                      <span className="text-xs font-bold uppercase tracking-widest" style={{ color: '#78716C', fontFamily: 'var(--font-display)' }}>
+                        I consent to WhatsApp updates
+                      </span>
+                    </label>
                   </div>
 
                   <button type="submit" disabled={mutation.isPending}

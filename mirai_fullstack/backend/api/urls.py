@@ -4,12 +4,6 @@ from . import views
 urlpatterns = [
     # System
     path('health/',              views.health_check,               name='health-check'),
-    path('inertia-test/',        views.inertia_home,               name='inertia-test'),
-    path('inertia-about/',       views.inertia_about,              name='inertia-about'),
-    path('inertia-blog/',        views.inertia_blog,               name='inertia-blog'),
-    path('inertia-blog/<slug:slug>/', views.inertia_blog_detail,   name='inertia-blog-detail'),
-    path('inertia-admissions/',  views.inertia_admissions,         name='inertia-admissions'),
-    path('inertia-programmes/',  views.inertia_programmes,         name='inertia-programmes'),
     # Branding
     path('settings/',            views.site_settings,              name='site-settings'),
     # Overview

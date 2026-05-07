@@ -1,6 +1,4 @@
 import { Link, Head } from '@inertiajs/react'
-import { useSEO } from '../hooks/useSEO'
-import { META, courseSchema, faqSchema, organizationSchema } from '../utils/seo'
 import FAQSection from '../components/FAQSection'
 import LeadMagnet from '../components/LeadMagnet'
 import ProspectusMagnet from '../components/ProspectusMagnet'
@@ -64,9 +62,12 @@ const assessmentTypes = [
 ]
 
 export default function Programmes({ programs }) {
-  useSEO(META.programmes, [courseSchema(programs ?? []), organizationSchema()])
   return (
     <>
+      <Head>
+        <title>Academic Programmes | IB Curriculum & Methodology</title>
+        <meta name="description" content="The International Baccalaureate framework, delivered with Mirai's signature experiential approach. Explore EYP, PYP, MYP, and DP." />
+      </Head>
       <PageHero title="Academic Programmes"
         subtitle="The International Baccalaureate framework, delivered with Mirai's signature experiential approach."
         breadcrumb={[{label:'Academic Programmes'}]}/>

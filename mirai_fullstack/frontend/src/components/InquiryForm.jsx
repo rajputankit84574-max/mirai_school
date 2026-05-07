@@ -8,6 +8,7 @@
  */
 import { useState, useCallback } from 'react'
 import { useSubmitEnquiry } from '../api'
+import { ingestLead } from '../api/leadIngest'
 
 /* ── Brand constants (read-only, same values as CSS vars) ─────────── */
 const B  = '#AA4A44'
@@ -140,6 +141,7 @@ const EMPTY = {
   // §9
   declaration_accepted: false,
   declaration_date:     '',
+  whatsapp_consent:     true, // Default to true for better conversion
 }
 
 /* ── Small reusable primitives ────────────────────────────────────── */
@@ -406,6 +408,17 @@ export default function InquiryForm() {
 
     mutation.mutate(payload, {
       onSuccess: data => {
+        // Trigger external lead ingest
+        ingestLead({
+          child_name:       payload.student_full_name,
+          parent_name:      payload.father_name,
+          mobile_number:    payload.father_mobile,
+          email:            payload.father_email,
+          child_dob:        payload.date_of_birth,
+          looking_for:      payload.applying_for_program,
+          whatsapp_consent: payload.whatsapp_consent,
+        })
+
         setSuccess(data.message)
         setForm(EMPTY)
         setErrors({})
@@ -911,24 +924,42 @@ export default function InquiryForm() {
             </p>
           </div>
           <Grid2>
-            <div>
-              <label className="flex items-start gap-3 cursor-pointer" data-err>
+            <div className="md:col-span-2">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl transition-all hover:bg-stone-50"
+                     style={{ border: fe.declaration_accepted ? `1.5px solid ${B}` : `1.5px solid transparent` }}>
                 <input type="checkbox"
                        name="declaration_accepted"
                        checked={form.declaration_accepted}
                        onChange={e => setForm(f => ({ ...f, declaration_accepted: e.target.checked }))}
-                       style={{ accentColor: B, width: 18, height: 18, marginTop: 2, cursor: 'pointer', flexShrink: 0 }} />
-                <span className="text-sm font-semibold"
-                      style={{ color: '#1C1917', fontFamily: 'var(--font-display)' }}>
-                  I/We accept the above declaration <span style={{ color: B }}>*</span>
-                </span>
+                       style={{ accentColor: B, width: 20, height: 20, marginTop: 2, cursor: 'pointer', flexShrink: 0 }} />
+                <div>
+                  <span className="text-sm font-bold block mb-1" style={{ color: '#1C1917', fontFamily: 'var(--font-display)' }}>
+                    I/We accept the above declaration <span style={{ color: B }}>*</span>
+                  </span>
+                  <p className="text-xs" style={{ color: '#78716C', fontFamily: 'var(--font-body)' }}>
+                    I hereby declare that all information provided is true and accurate.
+                  </p>
+                </div>
               </label>
               <FieldError msg={fe.declaration_accepted} />
             </div>
-            <div>
-              <Label>Date of Declaration</Label>
-              <Input name="declaration_date" value={form.declaration_date}
-                     onChange={handle} type="date" />
+
+            <div className="md:col-span-2">
+              <label className="flex items-start gap-3 cursor-pointer p-4 rounded-xl transition-all hover:bg-stone-50">
+                <input type="checkbox"
+                       name="whatsapp_consent"
+                       checked={form.whatsapp_consent}
+                       onChange={e => setForm(f => ({ ...f, whatsapp_consent: e.target.checked }))}
+                       style={{ accentColor: F, width: 20, height: 20, marginTop: 2, cursor: 'pointer', flexShrink: 0 }} />
+                <div>
+                  <span className="text-sm font-bold block mb-1" style={{ color: '#1C1917', fontFamily: 'var(--font-display)' }}>
+                    WhatsApp Consent
+                  </span>
+                  <p className="text-xs" style={{ color: '#78716C', fontFamily: 'var(--font-body)' }}>
+                    I consent to receiving school updates and admissions information via WhatsApp.
+                  </p>
+                </div>
+              </label>
             </div>
           </Grid2>
         </FormSection>

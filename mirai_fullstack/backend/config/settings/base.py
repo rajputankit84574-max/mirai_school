@@ -2,15 +2,16 @@ from pathlib import Path
 from decouple import config
 import os
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # ── SECURITY ──────────────────────────────────────────
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-fallback-mirai-school-2026')
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 # Fix: Dynamic ALLOWED_HOSTS from .env
 _hosts = config('ALLOWED_HOSTS', default='miraischool.in,localhost,127.0.0.1').split(',')
 ALLOWED_HOSTS = [h.strip() for h in _hosts if h.strip()]
+INTERNAL_IPS = ['127.0.0.1']
 
 # ── SOCIAL MEDIA & URLS ─────────────────────────────
 SITE_URL = config('SITE_URL', default='https://miraischool.in')
@@ -26,6 +27,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+    'inertia',
     # Local
     'api',
 ]
@@ -35,6 +37,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -48,7 +51,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR.parent, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,6 +97,39 @@ TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
 USE_TZ = True
 
+# ── PRODUCTION HARDENING ──────────────────────────────────────────────
+if not DEBUG:
+    # SSL/HTTPS
+    SECURE_SSL_REDIRECT     = True
+    SESSION_COOKIE_SECURE   = True
+    CSRF_COOKIE_SECURE      = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+    # HSTS
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    
+    # Browser features
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER   = True
+    X_FRAME_OPTIONS = 'DENY'
+
+# CSRF Trusted Origins (Required for Django 4.0+)
+CSRF_TRUSTED_ORIGINS = [
+    'https://miraischool.in',
+    'https://www.miraischool.in',
+    'http://localhost:5173',  # Vite dev server
+]
+
+# CORS
+CORS_ALLOWED_ORIGINS = [
+    'https://miraischool.in',
+    'https://www.miraischool.in',
+    'http://localhost:5173',
+]
+CORS_ALLOW_CREDENTIALS = True
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -112,19 +148,23 @@ CORS_ALLOW_ALL_ORIGINS = config('DEBUG', default=False, cast=bool)
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle'
+        'rest_framework.throttling.ScopedRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
         'anon':    '300/day',
-        'user':    '2000/day',
         'enquiry': '5/hour',  # Audit fix §2.1: Prevent lead spam
     },
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+    ],
     'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 12,

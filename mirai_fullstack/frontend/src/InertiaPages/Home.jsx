@@ -13,8 +13,6 @@
 import { Link, Head } from '@inertiajs/react'
 import { useEffect } from 'react'
 import { useFAQs } from '../api' // FAQs can still be client-side fetched if desired
-import { useSEO } from '../hooks/useSEO'
-import { META, organizationSchema, courseSchema, faqSchema } from '../utils/seo'
 import StatsBanner    from '../components/StatsBanner'
 import CTABanner      from '../components/CTABanner'
 import SectionHeader  from '../components/SectionHeader'
@@ -95,12 +93,12 @@ function Hero() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Link to="/student-inquiry#academic-session-header"
+              <Link href="/student-inquiry#academic-session-header"
                 className="btn btn-lg px-8"
                 style={{ background:'white', color:B, fontFamily:'var(--font-display)', fontWeight:800, textDecoration:'none' }}>
                 Enroll Now →
               </Link>
-              <Link to="/contact"
+              <Link href="/contact"
                 className="btn btn-ghost-white btn-lg px-8"
                 style={{ textDecoration:'none' }}>
                 Book Free Demo
@@ -201,7 +199,7 @@ function IntroSection() {
                 ))}
               </div>
             </div>
-            <Link to="/about" className="btn btn-primary" style={{ background: F, textDecoration: 'none' }}>
+            <Link href="/about" className="btn btn-primary" style={{ background: F, textDecoration: 'none' }}>
               Discover More About Mirai →
             </Link>
           </div>
@@ -245,7 +243,7 @@ function Marquee() {
 function ProgramCard({ prog }) {
   return (
     /* Audit §2.4 internal link: card → /programmes */
-    <Link to="/programmes" style={{ textDecoration:'none' }}>
+    <Link href="/programmes" style={{ textDecoration:'none' }}>
       <div className="bg-white rounded-2xl border card-hover relative overflow-hidden h-full"
            style={{ border:'1.5px solid #F0EDEA', boxShadow:'0 2px 16px rgba(170,74,68,0.06)' }}>
         <div className="absolute top-0 inset-x-0 h-1 rounded-t-2xl"
@@ -304,7 +302,7 @@ function FeatureSplit({ label, title, body, bullets, cta, ctaTo, visual, reverse
           ))}
         </ul>
         {/* Audit §4.2: strong CTA text */}
-        <Link to={ctaTo} className="btn btn-primary" style={{ background:accent, textDecoration:'none' }}>
+        <Link href={ctaTo} className="btn btn-primary" style={{ background:accent, textDecoration:'none' }}>
           {cta} →
         </Link>
       </div>
@@ -368,7 +366,7 @@ function TestCard({ t }) {
 function BlogCard({ post }) {
   return (
     /* Audit §2.4: internal link blog card → blog detail */
-    <Link to={`/blog/${post.slug}`} style={{ textDecoration:'none' }}>
+    <Link href={`/blog/${post.slug}`} style={{ textDecoration:'none' }}>
       <div className="bg-white rounded-2xl overflow-hidden card-hover h-full"
            style={{ border:'1.5px solid #F0EDEA', boxShadow:'0 2px 16px rgba(170,74,68,0.05)' }}>
         {/* ADDED IMAGE: Blog card thumbnail — category-specific school image */}
@@ -420,15 +418,12 @@ export default function Home({ overview, blogData }) {
   const blogPosts    = blogData?.results      ?? []
   const faqs         = Array.isArray(faqData) ? faqData : faqData?.results ?? []
 
-  // Audit §1.2 + §2.2: inject schema + optimized meta
-  useSEO(META.home, [
-    organizationSchema(),
-    faqSchema(faqs),
-    courseSchema(programs),
-  ])
-
   return (
     <>
+      <Head>
+        <title>Mirai Experiential School | Future-Ready IB Learning</title>
+        <meta name="description" content="Experience a transformative IB education where students excel through hands-on experiential learning, world-class sports, and a nurturing residential campus." />
+      </Head>
       <Hero />
       <Marquee />
 
@@ -445,7 +440,7 @@ export default function Home({ overview, blogData }) {
           </div>
           {/* Audit §2.4: internal link homepage → programmes */}
           <div className="text-center mt-10">
-            <Link to="/programmes" className="btn btn-outline" style={{ textDecoration:'none' }}>
+            <Link href="/programmes" className="btn btn-outline" style={{ textDecoration:'none' }}>
               Explore All IB Programmes →
             </Link>
           </div>
@@ -524,7 +519,7 @@ export default function Home({ overview, blogData }) {
           </div>
           {/* Audit §2.4: internal link → campus */}
           <div className="text-center mt-10">
-            <Link to="/campus" className="btn btn-outline" style={{ textDecoration:'none' }}>
+            <Link href="/campus" className="btn btn-outline" style={{ textDecoration:'none' }}>
               View Full Campus →
             </Link>
           </div>
@@ -544,7 +539,7 @@ export default function Home({ overview, blogData }) {
           </div>
           {/* Audit §4.4: student success callout — internal link */}
           <div className="text-center mt-10">
-            <Link to="/about"
+            <Link href="/about"
               className="btn btn-outline"
               style={{ textDecoration:'none' }}>
               Read Student Success Stories →
@@ -565,7 +560,7 @@ export default function Home({ overview, blogData }) {
               title="School Blog & News"
               subtitle="IB education, skill-based learning, AI careers, and student success."
             />
-            <Link to="/blog" className="btn btn-outline" style={{ marginBottom:48, textDecoration:'none' }}>
+            <Link href="/blog" className="btn btn-outline" style={{ marginBottom:48, textDecoration:'none' }}>
               View All Articles →
             </Link>
           </div>

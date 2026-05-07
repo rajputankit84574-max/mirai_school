@@ -1,11 +1,8 @@
-import { useSEO } from '../hooks/useSEO'
-import { META } from '../utils/seo'
-import { useFacilities } from '../api'
+import { Head, Link } from '@inertiajs/react'
 import PageHero from '../components/PageHero'
 import CTABanner from '../components/CTABanner'
 import SectionHeader from '../components/SectionHeader'
 import StatsBanner from '../components/StatsBanner'
-import LoadingSpinner from '../components/LoadingSpinner'
 import { FacilityTile } from '../components/BrandCard'
 
 const B = '#AA4A44', F = '#77966D'
@@ -17,7 +14,6 @@ const campusStats = [
   { value: '900',  suffix: '+', label: 'Seat Auditorium' },
 ]
 
-/* Section 2 – Smart Classrooms */
 const classroomFeatures = [
   { icon: '📺', title: 'Interactive Whiteboards', desc: 'Every classroom is equipped with large-format interactive displays enabling dynamic, touch-enabled lessons.' },
   { icon: '🥽', title: 'AR/VR Learning Tools', desc: 'Immersive augmented and virtual reality experiences bring complex concepts to life across subjects.' },
@@ -25,7 +21,6 @@ const classroomFeatures = [
   { icon: '🎙️', title: 'Smart Audio & Visual', desc: 'Crystal-clear sound systems, 4K projection, and wireless screen-sharing for collaborative and recorded sessions.' },
 ]
 
-/* Section 3 – Science & Innovation Labs */
 const labSpaces = [
   { icon: '🔬', title: 'Biology & Chemistry Labs', desc: 'Fully equipped labs with fume hoods, binocular microscopes, spectroscopes, and molecular modelling tools.' },
   { icon: '⚡', title: 'Physics Lab', desc: 'Precision instruments for optics, electronics, thermodynamics, and mechanics experiments aligned with IB standards.' },
@@ -33,7 +28,6 @@ const labSpaces = [
   { icon: '🧪', title: 'Experimentation Spaces', desc: 'Open-format maker spaces designed for unstructured, curiosity-driven hands-on experimentation and prototyping.' },
 ]
 
-/* Section 4 – Sports Infrastructure */
 const sportsSpaces = [
   { icon: '⚽', title: 'Outdoor Sports Grounds', desc: 'Multi-sport outdoor facility with football, cricket, athletics track, and field event areas.' },
   { icon: '🏀', title: 'Indoor Sports Hall', desc: 'Climate-controlled indoor hall with courts for basketball, badminton, futsal, pickleball, and volleyball.' },
@@ -41,19 +35,20 @@ const sportsSpaces = [
   { icon: '🎯', title: 'Speciality Sport Spaces', desc: 'Table tennis room, chess hall, air rifle shooting range, and skating rink for all-round student development.' },
 ]
 
-/* Section 5 – Safety & Security */
 const safetyMeasures = [
   { icon: '📹', title: 'CCTV Surveillance', desc: 'Over 200 high-definition CCTV cameras cover all campus zones — classrooms, corridors, sports areas, and entry points.' },
   { icon: '🔒', title: 'Controlled Campus Access', desc: 'Biometric and ID-card gated entry/exit systems ensure only authorised students, staff, and visitors may enter Mirai campus.' },
   { icon: '👮', title: 'Student Safety Protocols', desc: 'Trained security personnel on duty 24/7, emergency drills, and a clear crisis response framework in place at all times.' },
 ]
 
-export default function Campus() {
-  useSEO(META.campus)
-  const { data: facilities, isLoading } = useFacilities()
-
+export default function Campus({ facilities = [] }) {
   return (
     <>
+      <Head>
+        <title>Campus & Facilities | Mirai Experiential School</title>
+        <meta name="description" content="Explore our world-class green campus, STEM labs, and sports infrastructure designed for inspired learning." />
+      </Head>
+
       <PageHero
         title="Campus & Facilities"
         subtitle="A Green Campus purposefully designed for inspiring learning — where every corner encourages curiosity, creativity, and growth."
@@ -84,7 +79,7 @@ export default function Campus() {
                   { icon: '✨', label: 'Inspiring Learning Spaces' },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3 p-4 rounded-xl bg-white border transition-all hover:shadow-md"
-                    style={{ border: '1px solid #F0EDEA' }}>
+                    style={{ border: '1.5px solid #F0EDEA' }}>
                     <span className="text-xl">{item.icon}</span>
                     <span className="text-sm font-semibold" style={{ color: '#1C1917', fontFamily: 'var(--font-display)' }}>{item.label}</span>
                   </div>
@@ -186,20 +181,6 @@ export default function Campus() {
               </div>
             ))}
           </div>
-          <div className="mt-10 p-8 rounded-2xl" style={{ background: `linear-gradient(135deg, ${B}06, ${F}06)`, border: `1px solid ${F}20` }}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              {[
-                { icon: '🔬', label: '4 Dedicated Science Labs' },
-                { icon: '🛠️', label: 'Full Maker Space & Studio' },
-                { icon: '📐', label: 'IB-Compliant Equipment' },
-              ].map((item, i) => (
-                <div key={i} className="flex items-center justify-center gap-3">
-                  <span className="text-2xl">{item.icon}</span>
-                  <span className="font-semibold text-sm" style={{ color: '#44403C', fontFamily: 'var(--font-display)' }}>{item.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
@@ -223,15 +204,6 @@ export default function Campus() {
                 <p className="text-sm leading-relaxed" style={{ color: '#A8A29E' }}>{s.desc}</p>
               </div>
             ))}
-          </div>
-          <div className="mt-12 p-7 rounded-2xl text-center"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <p className="text-white font-display font-800 text-lg mb-1">
-              🏅 Sports integrated with the <span style={{ color: '#A8C79E' }}>IB Physical Education</span> programme
-            </p>
-            <p className="text-sm" style={{ color: '#A8A29E' }}>
-              All facilities available to curricular, co-curricular, and elite sports academy students year-round.
-            </p>
           </div>
         </div>
       </section>
@@ -277,27 +249,13 @@ export default function Campus() {
                   <p className="text-xs mt-0.5" style={{ color: '#78716C' }}>200+ CCTV cameras on campus</p>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-4">
-                {[
-                  { label: 'CCTV Cameras', value: '200+' },
-                  { label: 'Security Cover', value: '24/7' },
-                  { label: 'Secure Zones', value: '100%' },
-                ].map((s, i) => (
-                  <div key={i} className="p-4 rounded-2xl text-center bg-white border" style={{ border: '1px solid #F0EDEA' }}>
-                    <p className="text-lg font-bold" style={{ color: i % 2 === 0 ? B : F }}>{s.value}</p>
-                    <p className="text-[10px] mt-0.5 font-medium" style={{ color: '#78716C' }}>{s.label}</p>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── Dynamic Facilities from API ───────────────────────────────── */}
-      {isLoading ? (
-        <section className="py-16"><LoadingSpinner /></section>
-      ) : facilities?.length > 0 && (
+      {facilities?.length > 0 && (
         <section className="py-24">
           <div className="max-w-7xl mx-auto px-6">
             <SectionHeader center label="Full Inventory" title="All Campus Facilities" />
@@ -319,4 +277,3 @@ export default function Campus() {
     </>
   )
 }
-

@@ -1,45 +1,46 @@
 import { useState, useEffect } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, usePage } from '@inertiajs/react'
 import TopTicker from './TopTicker'
 
 const B = '#AA4A44'   // brand terracotta
 const F = '#77966D'   // forest green
 
 const navLinks = [
-  { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'Admissions', to: '/admissions#admission-form' },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Admissions', href: '/admissions#admission-form' },
   {
-    label: 'Campus & Life', to: '#',
+    label: 'Campus & Life', href: '#',
     children: [
-      { label: 'Campus & Facilities', to: '/campus' },
-      { label: 'Residential Life (Boarding)', to: '/residential' },
-      { label: 'Sports & Athletics', to: '/sports' },
-      { label: 'Student Life', to: '/student-life' },
+      { label: 'Campus & Facilities', href: '/campus' },
+      { label: 'Residential Life (Boarding)', href: '/residential' },
+      { label: 'Sports & Athletics', href: '/sports' },
+      { label: 'Student Life', href: '/student-life' },
     ],
   },
   {
-    label: 'Academics', to: '#',
+    label: 'Academics', href: '#',
     children: [
-      { label: 'Academic Programmes', to: '/programmes' },
-      { label: 'Experiential Learning', to: '/experiential-learning' },
-      { label: 'Global Exposure', to: '/global-exposure' },
+      { label: 'Academic Programmes', href: '/programmes' },
+      { label: 'Experiential Learning', href: '/experiential-learning' },
+      { label: 'Global Exposure', href: '/global-exposure' },
     ],
   },
   {
-    label: 'News & Media', to: '#',
+    label: 'News & Media', href: '#',
     children: [
-      { label: 'News & Events', to: '#', comingSoon: true },
-      { label: 'Gallery', to: '/gallery' },
+      { label: 'News & Events', href: '#', comingSoon: true },
+      { label: 'Gallery', href: '/gallery' },
     ],
   },
-  { label: 'Contact', to: '/contact' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 /**
  * 📱 Mobile Menu Component
  */
 function MobileMenu({ isOpen, onSelect }) {
+  const { url } = usePage()
   return (
     <div
       className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[90vh] py-6' : 'max-h-0'}`}
@@ -67,38 +68,39 @@ function MobileMenu({ isOpen, onSelect }) {
                       </div>
                     )
                   }
+                  const isActive = url === c.href
                   return (
-                    <NavLink key={c.to} to={c.to} onClick={onSelect}
+                    <Link key={c.href} href={c.href} onClick={onSelect}
                       className="flex items-center px-4 py-3 rounded-2xl text-[15px] font-semibold transition-all"
-                      style={({ isActive }) => ({
+                      style={{
                         fontFamily: 'var(--font-display)',
                         color: isActive ? B : '#44403C',
                         background: isActive ? '#FDF8F7' : 'transparent',
-                      })}>
+                      }}>
                       {c.label}
-                    </NavLink>
+                    </Link>
                   )
                 })}
               </div>
             </div>
           ) : (
-            <NavLink key={link.to} to={link.to} onClick={onSelect}
+            <Link key={link.href} href={link.href} onClick={onSelect}
               className="flex items-center px-4 py-4 rounded-2xl text-[16px] font-bold transition-all"
-              style={({ isActive }) => ({
+              style={{
                 fontFamily: 'var(--font-display)',
-                color: isActive ? B : '#44403C',
-                background: isActive ? '#FDF8F7' : 'transparent',
-              })}>
+                color: url === link.href ? B : '#44403C',
+                background: url === link.href ? '#FDF8F7' : 'transparent',
+              }}>
               {link.label}
-            </NavLink>
+            </Link>
           )
         )}
         <div className="mt-8 px-4 flex flex-col gap-3">
-          <Link to="/student-inquiry#academic-session-header" className="py-4 px-6 text-center text-white font-bold rounded-2xl shadow-lg"
+          <Link href="/student-inquiry#academic-session-header" className="py-4 px-6 text-center text-white font-bold rounded-2xl shadow-lg"
              style={{ background: B, boxShadow: '0 10px 25px -5px rgba(170, 74, 68, 0.4)' }}>
             Enroll Now →
           </Link>
-          <Link to="/contact" className="py-4 px-6 text-center font-bold rounded-2xl border border-stone-200"
+          <Link href="/contact" className="py-4 px-6 text-center font-bold rounded-2xl border border-stone-200"
              style={{ color: '#44403C' }}>
             Book a Visit
           </Link>
@@ -111,7 +113,7 @@ function MobileMenu({ isOpen, onSelect }) {
 export default function Navbar() {
   const [scrolled,   setScrolled]   = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const location = useLocation()
+  const { url } = usePage()
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 32)
@@ -121,7 +123,7 @@ export default function Navbar() {
 
   useEffect(() => {
     setMobileOpen(false)
-  }, [location])
+  }, [url])
 
   return (
     <>
@@ -145,7 +147,7 @@ export default function Navbar() {
           <div className={`flex items-center justify-between transition-all duration-500 ${scrolled ? 'h-20' : 'h-24'}`}>
 
             {/* ── Logo ── */}
-            <Link to="/" className="flex items-center flex-shrink-0">
+            <Link href="/" className="flex items-center flex-shrink-0">
               <img 
                 src="/logo.png" 
                 alt="Mirai Experiential School"
@@ -201,35 +203,36 @@ export default function Navbar() {
                               </div>
                             )
                           }
+                          const isActive = url === c.href
                           return (
-                            <NavLink key={c.to} to={c.to}
+                            <Link key={c.href} href={c.href}
                               className="flex items-center gap-3 px-5 py-3 text-[14px] font-medium transition-all duration-200"
-                              style={({ isActive }) => ({
+                              style={{
                                 fontFamily: 'var(--font-body)',
                                 color: isActive ? B : '#44403C',
                                 background: isActive ? '#FDF8F7' : 'transparent',
-                              })}
+                              }}
                             >
                               {c.label}
-                            </NavLink>
+                            </Link>
                           )
                         })}
                       </div>
                     </>
                   ) : (
-                    <NavLink to={link.to}
+                    <Link href={link.href}
                       className="relative block px-4 py-2 rounded-xl text-[14px] font-semibold transition-all duration-300 group"
-                      style={({ isActive }) => ({
+                      style={{
                         fontFamily: 'var(--font-display)',
-                        color: isActive ? B : '#44403C',
-                      })}
+                        color: url === link.href ? B : '#44403C',
+                      }}
                     >
                       {link.label}
                       <span 
                         className={`absolute bottom-0 left-4 right-4 h-0.5 rounded-full transition-transform duration-300 scale-x-0 group-hover:scale-x-100`}
                         style={{ background: B }}
                       />
-                    </NavLink>
+                    </Link>
                   )}
                 </li>
               ))}
@@ -237,7 +240,7 @@ export default function Navbar() {
 
             {/* ── Desktop CTAs & Socials ── */}
             <div className="hidden lg:flex items-center gap-4">
-              <Link to="/contact"
+              <Link href="/contact"
                 className="text-[14px] font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 border-[1.5px]"
                 style={{ 
                   fontFamily: 'var(--font-display)', 
@@ -248,7 +251,7 @@ export default function Navbar() {
               >
                 Book a Visit
               </Link>
-              <Link to="/student-inquiry#academic-session-header"
+              <Link href="/student-inquiry#academic-session-header"
                 className="btn flex items-center justify-center"
                 style={{ 
                   background: B, 

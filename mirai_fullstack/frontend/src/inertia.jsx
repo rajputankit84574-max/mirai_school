@@ -1,7 +1,8 @@
+import { StrictMode } from 'react'
 import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
-import { StrictMode } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import './index.css'
 
 const queryClient = new QueryClient()
 
@@ -19,4 +20,8 @@ createInertiaApp({
       </StrictMode>
     )
   },
+})
+
+requestAnimationFrame(() => {
+  document.dispatchEvent(new Event('custom-render-trigger'))
 })

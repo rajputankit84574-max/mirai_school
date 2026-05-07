@@ -4,7 +4,7 @@
  * Audit fix §4.2: CTA buttons → "Enroll Now", "Book Free Demo"
  * Audit fix §7.3: Lead Generation Funnel — demo booking, WhatsApp CTA, free trial
  */
-import { Link } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 
 const B  = '#AA4A44'
 const F  = '#77966D'
@@ -52,14 +52,14 @@ export default function LeadMagnet() {
               {/* Audit §4.2 + §4.5: Strong CTAs — "Enroll Now" + "Book Free Demo" + WhatsApp */}
               <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
                 <Link
-                  to="/student-inquiry#academic-session-header"
+                  href="/student-inquiry#academic-session-header"
                   className="btn btn-lg"
                   style={{ background: 'white', color: B, fontFamily: 'var(--font-display)', fontWeight: 800, textDecoration: 'none' }}
                 >
                   Enroll Now →
                 </Link>
                 <Link
-                  to="/contact"
+                  href="/contact"
                   className="btn btn-ghost-white btn-lg"
                   style={{ textDecoration: 'none' }}
                 >

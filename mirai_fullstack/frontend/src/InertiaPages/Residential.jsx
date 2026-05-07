@@ -1,5 +1,4 @@
-import { useSEO } from '../hooks/useSEO'
-import { META, organizationSchema } from '../utils/seo'
+import { Head, Link } from '@inertiajs/react'
 import PageHero from '../components/PageHero'
 import CTABanner from '../components/CTABanner'
 import SectionHeader from '../components/SectionHeader'
@@ -12,7 +11,7 @@ const facilities = [
   { icon: '🛏️', title: 'Private Rooms', desc: 'Comfortable private rooms with attached bathroom and toilet, individual study desks, wardrobes, and climate control.' },
   { icon: '📚', title: 'Dedicated Study Areas', desc: 'Quiet, well-lit study rooms with high-speed WiFi, printing facilities, and supervision during prep hours.' },
   { icon: '🎮', title: 'Recreation Spaces', desc: 'Indoor games rooms, reading corners, TV lounges, and outdoor gardens for rest and recreation.' },
-  { icon: '🍽️', title: 'Dining Facilities', desc: 'Spacious, hygienic dining hall serving nutritious meals with residential staff supervision during mealtimes.' },
+  { icon: '🛏️', title: 'Dining Facilities', desc: 'Spacious, hygienic dining hall serving nutritious meals with residential staff supervision during mealtimes.' },
 ]
 
 /* 6.3 Daily Routine */
@@ -49,10 +48,13 @@ const residentialStats = [
 ]
 
 export default function Residential() {
-  useSEO(META.residential, [organizationSchema()])
-
   return (
     <>
+      <Head>
+        <title>Residential Life (Boarding) | Mirai Experiential School</title>
+        <meta name="description" content="A safe, nurturing home away from home — where students grow in independence, character, and community at Mirai boarding school." />
+      </Head>
+
       <PageHero
         title="Residential Life (Boarding)"
         subtitle="A safe, nurturing home away from home — where students grow in independence, character, and community."
@@ -69,7 +71,6 @@ export default function Residential() {
                 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(1.8rem,3vw,2.6rem)', color: '#1C1917' }}>
                 A Boarding School Where Every Student Thrives
               </h2>
-              {/* SEO keywords naturally embedded */}
               <p className="text-base leading-relaxed mb-5" style={{ color: '#78716C' }}>
                 Mirai Experiential School is a premier <strong style={{ color: '#44403C' }}>residential school with an IB curriculum</strong>, offering students a safe, structured, and inspiring environment where learning continues beyond the classroom. As a leading <strong style={{ color: '#44403C' }}>boarding school with sports</strong>, Mirai combines academic rigour with physical excellence under one roof.
               </p>
@@ -128,11 +129,6 @@ export default function Residential() {
               </div>
             ))}
           </div>
-          <div className="mt-8 p-6 rounded-2xl text-center" style={{ background: `${F}08`, border: `1px solid ${F}20` }}>
-            <p className="text-sm font-medium" style={{ color: '#44403C' }}>
-              All residential facilities are maintained by <strong>trained residential staff</strong> who live on campus and ensure a safe, clean, and supportive environment for every student.
-            </p>
-          </div>
         </div>
       </section>
 
@@ -142,13 +138,11 @@ export default function Residential() {
           <SectionHeader center label="Hostel Life & Daily Routine" title="Structure That Sets Students Free"
             subtitle="Every day at Mirai Boarding is purposeful, balanced, and energising." />
           <div className="mt-12 relative">
-            {/* Timeline connector */}
             <div className="hidden lg:block absolute left-[calc(50%-1px)] top-6 bottom-6 w-0.5"
               style={{ background: `linear-gradient(to bottom, ${B}40, ${F}, ${B}40)` }} />
             <div className="space-y-6">
               {routine.map((item, i) => (
                 <div key={i} className={`flex items-start gap-6 lg:gap-0 ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
-                  {/* Content block */}
                   <div className={`flex-1 ${i % 2 === 0 ? 'lg:pr-16 lg:text-right' : 'lg:pl-16'}`}>
                     <div className="inline-flex items-center gap-3 p-5 bg-white rounded-2xl shadow-sm border transition-all hover:shadow-lg"
                       style={{ border: '1.5px solid #F0EDEA' }}>
@@ -162,12 +156,10 @@ export default function Residential() {
                       </div>
                     </div>
                   </div>
-                  {/* Centre dot */}
                   <div className="hidden lg:flex flex-shrink-0 w-6 h-6 rounded-full items-center justify-center shadow-md mt-4 z-10"
                     style={{ background: i % 2 === 0 ? B : F }}>
                     <div className="w-2 h-2 rounded-full bg-white" />
                   </div>
-                  {/* Empty spacer */}
                   <div className="flex-1 hidden lg:block" />
                 </div>
               ))}
@@ -198,54 +190,6 @@ export default function Residential() {
         </div>
       </section>
 
-      {/* ── 6.5 Dining & Nutrition ───────────────────────────────────── */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="rounded-3xl overflow-hidden aspect-[4/3] relative shadow-2xl">
-              <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=800&q=85&auto=format"
-                alt="Nutritious hygienic meals at Mirai Boarding School dining hall"
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(20,10,8,0.4) 0%, transparent 60%)' }} />
-              <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg">
-                <p className="text-xs font-bold" style={{ color: '#1C1917' }}>3 Nutritious Meals Daily</p>
-                <p className="text-xs mt-0.5" style={{ color: '#78716C' }}>Balanced, hygienic, and student-approved</p>
-              </div>
-            </div>
-            <div>
-              <div className="section-label mb-4" style={{ display: 'inline-flex' }}>Dining & Nutrition</div>
-              <h2 className="font-display font-800 leading-tight mb-5"
-                style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(1.8rem,3vw,2.6rem)', color: '#1C1917' }}>
-                Fuel That Powers Learning & Performance
-              </h2>
-              <p className="text-base leading-relaxed mb-8" style={{ color: '#78716C' }}>
-                At Mirai, we believe that nutrition is inseparable from academic and athletic performance. Every meal is carefully planned by a qualified nutritionist to support the physical and cognitive needs of growing students.
-              </p>
-              <div className="space-y-5">
-                {[
-                  { icon: '🥗', title: 'Balanced & Hygienic Meals', desc: 'Freshly prepared breakfast, lunch, and dinner with seasonal vegetables, proteins, and wholegrains served in our hygienic dining hall.' },
-                  { icon: '💪', title: 'Student Health & Growth', desc: 'Menus are designed to support concentration, energy levels, and physical growth — aligned with nutritional guidelines for school-age children.' },
-                  { icon: '🌿', title: 'Special Dietary Needs', desc: 'Vegetarian, vegan, allergen-free, and cultural dietary requirements are accommodated wherever possible with prior arrangement.' },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-5 p-5 rounded-2xl bg-stone-50 border transition-all hover:shadow-md"
-                    style={{ border: '1px solid #F0EDEA' }}>
-                    <div className="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center text-xl"
-                      style={{ background: i % 2 === 0 ? `${F}15` : `${B}10` }}>
-                      {item.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-display font-800 text-sm mb-1"
-                        style={{ color: '#1C1917', fontFamily: 'var(--font-display)', fontWeight: 800 }}>{item.title}</h4>
-                      <p className="text-sm leading-relaxed" style={{ color: '#78716C' }}>{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── 6.6 Safety & Security ────────────────────────────────────── */}
       <section className="py-24 relative overflow-hidden" style={{ background: '#1C1917' }}>
         <div className="absolute inset-0 opacity-5"
@@ -257,48 +201,13 @@ export default function Residential() {
             {safetyFeatures.map((s, i) => (
               <div key={i} className="rounded-2xl p-8 text-center transition-all duration-300 hover:scale-[1.03]"
                 style={{ background: '#262220', border: '1px solid rgba(255,255,255,0.07)' }}>
-                <div className="w-18 h-18 w-16 h-16 rounded-2xl mx-auto flex items-center justify-center text-3xl mb-6"
+                <div className="w-16 h-16 rounded-2xl mx-auto flex items-center justify-center text-3xl mb-6"
                   style={{ background: i % 2 === 0 ? `${B}30` : `${F}30` }}>
                   {s.icon}
                 </div>
                 <h4 className="font-display font-800 text-xl mb-3"
                   style={{ color: 'white', fontFamily: 'var(--font-display)', fontWeight: 800 }}>{s.title}</h4>
                 <p className="text-sm leading-relaxed" style={{ color: '#A8A29E' }}>{s.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-12 p-8 rounded-2xl text-center"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <p className="text-white font-display font-800 text-lg mb-2">
-              🔒 A campus where parents feel <span style={{ color: '#E8A49F' }}>confident</span> and students feel <span style={{ color: '#A8C79E' }}>safe</span>
-            </p>
-            <p className="text-sm" style={{ color: '#A8A29E' }}>
-              All residential policies comply with national child safety regulations and international boarding standards.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 6.7 Boarding Admission Process ───────────────────────────── */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionHeader center label="Boarding Admission Process" title="Simple, Clear & Welcoming"
-            subtitle="We make the boarding admissions journey as smooth and transparent as possible for families." />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-            {[
-              { step: '01', icon: '📋', title: 'Submit Application', desc: 'Complete the boarding application form with family details, student academic records, and residency preferences.' },
-              { step: '02', icon: '🎙️', title: 'Student Interaction', desc: 'A warm, informal interaction session with our residential team to assess the student\'s needs and readiness for boarding.' },
-              { step: '03', icon: '📊', title: 'Assessment & Review', desc: 'Academic and social assessment conducted to ensure the student is placed in the most supportive residential environment.' },
-              { step: '04', icon: '✅', title: 'Onboarding & Orientation', desc: 'Confirmed students receive a full onboarding kit, campus orientation, and a parent welcome session before joining.' },
-            ].map((step, i) => (
-              <div key={i} className="relative bg-white rounded-2xl p-8 border transition-all hover:shadow-xl hover:-translate-y-1"
-                style={{ border: '1.5px solid #F0EDEA' }}>
-                <div className="absolute -top-4 left-6 px-3 py-1 rounded-full text-xs font-bold text-white"
-                  style={{ background: i % 2 === 0 ? B : F }}>{step.step}</div>
-                <div className="text-4xl mb-5 mt-2">{step.icon}</div>
-                <h4 className="font-display font-800 text-base mb-3"
-                  style={{ color: '#1C1917', fontFamily: 'var(--font-display)', fontWeight: 800 }}>{step.title}</h4>
-                <p className="text-sm leading-relaxed" style={{ color: '#78716C' }}>{step.desc}</p>
               </div>
             ))}
           </div>

@@ -1,17 +1,15 @@
-import { useSEO } from '../hooks/useSEO'
-import { META, organizationSchema } from '../utils/seo'
+import { Head, Link } from '@inertiajs/react'
 import PageHero from '../components/PageHero'
 import InquiryForm from '../components/InquiryForm'
 
 export default function StudentInquiry() {
-  useSEO({
-    title: 'Student Inquiry Form | Mirai Experiential School',
-    description: 'Enrol your child at Mirai Experiential School. Fill out our comprehensive student inquiry form to start the admission process for the 2026–27 academic year.',
-    keywords: 'school inquiry, admission form, Mirai school enrolment, IB school admissions'
-  }, [organizationSchema()])
-
   return (
     <>
+      <Head>
+        <title>Student Inquiry Form | Mirai Experiential School</title>
+        <meta name="description" content="Enrol your child at Mirai Experiential School. Fill out our comprehensive student inquiry form to start the admission process for the 2026–27 academic year." />
+      </Head>
+
       <PageHero
         title="Student Inquiry Form"
         subtitle="Start your child's journey with India's leading IB experiential school. Please provide the details below and our admissions team will get in touch with you."

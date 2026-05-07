@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 
 const B = '#AA4A44'
 
@@ -31,14 +31,14 @@ export default function PageHero({ title, subtitle, breadcrumb = [] }) {
         {breadcrumb.length > 0 && (
           <div className="flex items-center justify-center gap-2 mb-5 text-xs"
                style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-body)' }}>
-            <Link to="/" className="transition-colors hover:text-white">Home</Link>
+            <Link href="/" className="transition-colors hover:text-white">Home</Link>
             {breadcrumb.map((b, i) => (
               <span key={i} className="flex items-center gap-2">
                 <span style={{ color: 'rgba(255,255,255,0.3)' }}>›</span>
                 {i === breadcrumb.length - 1 ? (
                   <span style={{ color: 'rgba(255,255,255,0.85)' }}>{b.label}</span>
                 ) : (
-                  <Link to={b.to} className="transition-colors hover:text-white">{b.label}</Link>
+                  <Link href={b.href} className="transition-colors hover:text-white">{b.label}</Link>
                 )}
               </span>
             ))}

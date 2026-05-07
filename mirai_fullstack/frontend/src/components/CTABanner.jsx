@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 
 export default function CTABanner({
   label       = 'Admissions 2026–27 Open',
@@ -41,11 +41,11 @@ export default function CTABanner({
           {subtitle}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to={primaryTo} className="btn btn-lg"
+          <Link href={primaryTo} className="btn btn-lg"
                 style={{ background:'white', color:'#AA4A44', fontFamily:'var(--font-display)' }}>
             {primaryText}
           </Link>
-          <Link to={secondaryTo} className="btn btn-ghost-white btn-lg">
+          <Link href={secondaryTo} className="btn btn-ghost-white btn-lg">
             {secondaryText}
           </Link>
         </div>

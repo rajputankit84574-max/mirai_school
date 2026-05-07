@@ -1,5 +1,3 @@
-import { useSEO } from '../hooks/useSEO'
-import { META } from '../utils/seo'
 import { Link, Head } from '@inertiajs/react'
 import { useState } from 'react'
 import PageHero from '../components/PageHero'
@@ -156,7 +154,7 @@ function BlogCard({ post }) {
         <h3 className="font-display font-800 text-xl leading-snug mb-2"
             style={{fontFamily:'var(--font-display)',fontWeight:800,color:'#1C1917'}}>{post.title}</h3>
         <p className="text-sm leading-relaxed mb-5 line-clamp-2" style={{color:'#78716C',fontFamily:'var(--font-body)'}}>{post.excerpt}</p>
-        <Link to={`/blog/${post.slug}`}
+        <Link href={`/blog/${post.slug}`}
           className="inline-flex items-center gap-1.5 text-sm font-bold transition-all hover:gap-3"
           style={{color:B,fontFamily:'var(--font-display)'}}>Read Article →</Link>
       </div>
@@ -165,8 +163,6 @@ function BlogCard({ post }) {
 }
 
 export default function Blog({ blogData, catData }) {
-  useSEO(META.blog)
-
   const [selectedCat, setSelectedCat] = useState('')
   
   // FIX: API returns paginated {count, results:[]} — unwrap .results; fall back to array
@@ -182,6 +178,10 @@ export default function Blog({ blogData, catData }) {
 
   return (
     <>
+      <Head>
+        <title>Insights & News | Mirai Experiential School Blog</title>
+        <meta name="description" content="Explore stories, educational insights, and community updates from Mirai Experiential School. Stay informed about the future of learning." />
+      </Head>
       <PageHero title="School Blog & News" subtitle="Stories, insights, and updates from the Mirai community." breadcrumb={[{label:'Blog'}]}/>
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">

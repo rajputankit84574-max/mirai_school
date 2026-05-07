@@ -1,25 +1,25 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 
 const B = '#AA4A44'
 
 const cols = {
   Academics: [
-    { label: 'IB Programmes',         to: '/programmes' },
-    { label: 'Experiential Learning',  to: '/experiential-learning' },
-    { label: 'Global Exposure',        to: '/global-exposure' },
-    { label: 'Student Life',           to: '/student-life' },
+    { label: 'IB Programmes',         href: '/programmes' },
+    { label: 'Experiential Learning',  href: '/experiential-learning' },
+    { label: 'Global Exposure',        href: '/global-exposure' },
+    { label: 'Student Life',           href: '/student-life' },
   ],
   Campus: [
-    { label: 'Facilities',         to: '/campus' },
-    { label: 'Sports & Athletics', to: '/sports' },
-    { label: 'Boarding',           to: '/residential' },
-    { label: 'About Us',           to: '/about' },
+    { label: 'Facilities',         href: '/campus' },
+    { label: 'Sports & Athletics', href: '/sports' },
+    { label: 'Boarding',           href: '/residential' },
+    { label: 'About Us',           href: '/about' },
   ],
   Admissions: [
-    { label: 'How to Apply',  to: '/admissions' },
-    { label: 'Fee Structure', to: '/admissions' },
-    { label: 'Book a Visit',  to: '/contact' },
-    { label: 'School Blog',   to: '/blog' },
+    { label: 'How to Apply',  href: '/admissions' },
+    { label: 'Fee Structure', href: '/admissions' },
+    { label: 'Book a Visit',  href: '/contact' },
+    { label: 'School Blog',   href: '/blog' },
   ],
 }
 
@@ -90,8 +90,8 @@ export default function Footer() {
               </h4>
               <ul className="space-y-2.5">
                 {links.map(l => (
-                  <li key={l.to}>
-                    <Link to={l.to}
+                  <li key={l.href}>
+                    <Link href={l.href}
                       className="text-sm transition-colors duration-150"
                       style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-body)' }}
                       onMouseEnter={e => e.target.style.color = B}

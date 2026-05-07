@@ -1,6 +1,4 @@
 import { Link, Head, usePage } from '@inertiajs/react'
-import { useSEO } from '../hooks/useSEO'
-import { META, faqSchema, organizationSchema } from '../utils/seo'
 import FAQSection from '../components/FAQSection'
 import LeadMagnet from '../components/LeadMagnet'
 import InquiryForm from '../components/InquiryForm'
@@ -75,12 +73,14 @@ const admissionsStats = [
 
 export default function Admissions({ steps, faqData }) {
   const faqs = Array.isArray(faqData) ? faqData : faqData?.results ?? []
-  useSEO(META.admissions, [faqSchema(faqs), organizationSchema()])
-
   const stepsArr = steps ?? []
 
   return (
     <>
+      <Head>
+        <title>Admissions 2026–27 | Join Mirai Experiential School</title>
+        <meta name="description" content="Transparent, parent-friendly admission process for India's leading IB experiential school. Apply now for the 2026–27 academic session." />
+      </Head>
       <PageHero
         title="Admissions 2026–27"
         subtitle="Join India's leading IB experiential school. A transparent, parent-friendly process designed to find the right fit for every child."
@@ -167,7 +167,7 @@ export default function Admissions({ steps, faqData }) {
               </div>
             </div>
           <div className="mt-14 text-center">
-            <Link to="/student-inquiry#academic-session-header"
+            <Link href="/student-inquiry#academic-session-header"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white text-sm font-bold transition-all hover:shadow-xl hover:-translate-y-1"
               style={{ background: B, fontFamily: 'var(--font-display)', textDecoration: 'none' }}>
               📝 Start Your Application

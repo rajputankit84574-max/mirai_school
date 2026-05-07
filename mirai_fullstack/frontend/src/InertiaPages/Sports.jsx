@@ -1,6 +1,4 @@
 import { Link, Head } from '@inertiajs/react'
-import { useSEO } from '../hooks/useSEO'
-import { META, organizationSchema } from '../utils/seo'
 
 const B = '#AA4A44', F = '#77966D'
 
@@ -43,10 +41,12 @@ const sportsStats = [
 ]
 
 export default function Sports() {
-  useSEO(META.sports, [organizationSchema()])
-
   return (
     <>
+      <Head>
+        <title>Sports & Athletics | World-Class Facilities at Mirai</title>
+        <meta name="description" content="20+ sports disciplines, professional coaching, and elite sports academies — because physical excellence and academic achievement go hand in hand at Mirai." />
+      </Head>
       <PageHero
         title="Sports & Athletics"
         subtitle="We believe a healthy body and a disciplined mind are inseparable. Sports at Mirai are central to who we are."

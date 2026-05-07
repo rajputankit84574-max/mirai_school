@@ -1,5 +1,4 @@
-import { useSEO } from '../hooks/useSEO'
-import { META, organizationSchema } from '../utils/seo'
+import { Head, Link } from '@inertiajs/react'
 import PageHero from '../components/PageHero'
 import CTABanner from '../components/CTABanner'
 import SectionHeader from '../components/SectionHeader'
@@ -40,10 +39,13 @@ const competitions = [
 ]
 
 export default function GlobalExposure() {
-  useSEO(META.globalExposure, [organizationSchema()])
-
   return (
     <>
+      <Head>
+        <title>Global Exposure | Mirai Experiential School</title>
+        <meta name="description" content="Prepare your child for a global future with Mirai's international exchange programs, university pathways, and global competitions." />
+      </Head>
+
       <PageHero
         title="Global Exposure"
         subtitle="We prepare students not just for universities — but for a complex, interconnected, and opportunity-filled world."
@@ -71,19 +73,6 @@ export default function GlobalExposure() {
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Partnership logos strip */}
-          <div className="mt-14 p-8 rounded-2xl text-center" style={{ background: 'white', border: '1.5px solid #F0EDEA' }}>
-            <p className="text-xs font-bold tracking-widest uppercase mb-5" style={{ color: '#A8A29E' }}>Popular Study Destinations</p>
-            <div className="flex flex-wrap justify-center gap-4">
-              {['🇬🇧 United Kingdom', '🇺🇸 United States', '🇸🇬 Singapore', '🇦🇺 Australia', '🇨🇦 Canada', '🇯🇵 Japan', '🇫🇷 France', '🇩🇪 Germany'].map((region, i) => (
-                <span key={i} className="px-4 py-2 rounded-full text-sm font-medium"
-                  style={{ background: '#F5F5F4', color: '#44403C', fontFamily: 'var(--font-body)' }}>
-                  {region}
-                </span>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -120,28 +109,14 @@ export default function GlobalExposure() {
                 ))}
               </div>
             </div>
-            <div className="space-y-4">
-              <div className="rounded-3xl overflow-hidden aspect-[4/3] relative shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?w=800&q=85&auto=format"
-                  alt="Mirai students experiencing global cultural exchange"
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(20,10,8,0.5) 0%, transparent 60%)' }} />
-                <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg">
-                  <p className="text-xs font-bold" style={{ color: '#1C1917' }}>Annual Exchange Programme</p>
-                  <p className="text-xs mt-0.5" style={{ color: '#78716C' }}>International study opportunities across 5 continents</p>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { label: 'Exchange Students Hosted', value: '50+' },
-                  { label: 'Countries Represented', value: '20+' },
-                ].map((stat, i) => (
-                  <div key={i} className="p-6 rounded-2xl text-center"
-                    style={{ background: i === 0 ? B : F }}>
-                    <p className="text-3xl font-bold text-white mb-1">{stat.value}</p>
-                    <p className="text-xs text-white/80 font-medium">{stat.label}</p>
-                  </div>
-                ))}
+            <div className="rounded-3xl overflow-hidden aspect-[4/3] relative shadow-2xl">
+              <img src="https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?w=800&q=85&auto=format"
+                alt="Mirai students experiencing global cultural exchange"
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(20,10,8,0.5) 0%, transparent 60%)' }} />
+              <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg">
+                <p className="text-xs font-bold" style={{ color: '#1C1917' }}>Annual Exchange Programme</p>
+                <p className="text-xs mt-0.5" style={{ color: '#78716C' }}>International study opportunities across 5 continents</p>
               </div>
             </div>
           </div>
@@ -150,11 +125,6 @@ export default function GlobalExposure() {
 
       {/* ── 9.3 Global Competitions ──────────────────────────────────── */}
       <section className="py-24 relative overflow-hidden" style={{ background: '#1C1917' }}>
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-5"
-          style={{ background: `radial-gradient(circle, ${B}, transparent)`, transform: 'translate(30%, -30%)' }} />
-        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full opacity-5"
-          style={{ background: `radial-gradient(circle, ${F}, transparent)`, transform: 'translate(-30%, 30%)' }} />
-
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <SectionHeader center label="Global Competitions" title="Showcasing Talent on the World Stage" light
             subtitle="Mirai students compete — and win — at the highest international levels across academics, sports, and innovation." />
@@ -179,17 +149,6 @@ export default function GlobalExposure() {
               </div>
             ))}
           </div>
-
-          {/* Competitions callout */}
-          <div className="mt-14 p-8 rounded-2xl text-center"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <p className="text-white font-display font-800 text-xl mb-2">
-              🏆 <span style={{ color: '#E8A49F' }}>Competing globally</span> — from robotics finals to MUN podiums
-            </p>
-            <p className="text-sm" style={{ color: '#A8A29E' }}>
-              Every competition is an opportunity to grow, connect, and represent Mirai on the world stage.
-            </p>
-          </div>
         </div>
       </section>
 
@@ -202,4 +161,3 @@ export default function GlobalExposure() {
     </>
   )
 }
-

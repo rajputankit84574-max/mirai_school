@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% inertia_head %}
+</head>
+<body>
+    {% inertia %}
+
+    {# In development, we load from the Vite dev server. In production, we'd load from built assets. #}
+    {% if debug %}
+        <script type="module" src="http://localhost:5173/@vite/client"></script>
+        <script type="module" src="http://localhost:5173/src/inertia.jsx"></script>
+    {% else %}
+        {# This section would be replaced with production build links #}
+        <script type="module" src="/static/assets/main.js"></script>
+    {% endif %}
+</body>
+</html>

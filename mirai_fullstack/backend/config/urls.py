@@ -49,10 +49,32 @@ Sitemap: https://miraischool.in/sitemap.xml
 """
     return HttpResponse(content, content_type='text/plain')
 
+from api import views as api_views
+
 urlpatterns = [
     path('sitemap.xml', sitemap_xml, name='sitemap'),
     path('robots.txt',  robots_txt,  name='robots'),
     path('admin/', admin.site.urls),
+    
+    # ── Website (Inertia.js Monolith) ─────────────────────────────
+    path('',                     api_views.inertia_home,           name='home'),
+    path('about/',               api_views.inertia_about,          name='about'),
+    path('blog/',                api_views.inertia_blog,           name='blog'),
+    path('blog/<slug:slug>/',    api_views.inertia_blog_detail,    name='blog-detail'),
+    path('admissions/',          api_views.inertia_admissions,     name='admissions'),
+    path('programmes/',          api_views.inertia_programmes,     name='programmes'),
+    path('sports/',              api_views.inertia_sports,         name='sports'),
+    path('residential/',         api_views.inertia_residential,    name='residential'),
+    path('campus/',              api_views.inertia_campus,         name='campus'),
+    path('experiential-learning/', api_views.inertia_experiential, name='experiential'),
+    path('student-life/',        api_views.inertia_student_life,   name='student-life'),
+    path('global-exposure/',     api_views.inertia_global_exposure, name='global-exposure'),
+    path('gallery/',             api_views.inertia_gallery,         name='gallery'),
+    path('contact/',             api_views.inertia_contact,         name='contact'),
+    path('student-inquiry/',     api_views.inertia_student_inquiry, name='student-inquiry'),
+    path('news/',                api_views.inertia_news,            name='news'),
+
+    # ── API (Data endpoints) ──────────────────────────────────────
     path('api/', include('api.urls')),
     path('api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain'),
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

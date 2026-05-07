@@ -109,9 +109,9 @@ export default function FAQSection({ category = '', maxItems = 8, showHeader = t
           <p className="text-sm mb-4" style={{ color: '#78716C', fontFamily: 'var(--font-body)' }}>
             Have more questions? We're happy to help.
           </p>
-          <a href="/contact" className="btn btn-primary" style={{ textDecoration: 'none' }}>
+          <Link href="/contact" className="btn btn-primary" style={{ textDecoration: 'none' }}>
             Book a Free Consultation →
-          </a>
+          </Link>
         </div>
       </div>
     </section>

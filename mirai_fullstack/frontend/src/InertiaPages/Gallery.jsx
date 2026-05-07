@@ -1,12 +1,11 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useSEO } from '../hooks/useSEO'
-import { META, organizationSchema } from '../utils/seo'
+import { Head, Link } from '@inertiajs/react'
 import PageHero from '../components/PageHero'
 import CTABanner from '../components/CTABanner'
 
 const B = '#AA4A44', F = '#77966D'
 
-const photos = [
+const staticPhotos = [
   /* ── Campus ─────────────────────────────────────────── */
   { cat: 'Campus', title: 'Main Academic Block',       caption: 'State-of-the-art infrastructure built for inspired learning',      url: '/mirai_school2_image.jpeg', span: 'tall' },
   { cat: 'Campus', title: 'Modern Architecture',        caption: 'Contemporary design blending with nature',                          url: '/mirai_school3_image.jpeg' },
@@ -34,14 +33,6 @@ const photos = [
   { cat: 'Classroom Learning', title: 'Innovation Lab',          caption: 'Hands-on experimentation in our modern activity rooms',       url: '/mirai_activityroom_image.jpeg' },
   { cat: 'Classroom Learning', title: 'Primary Discovery Zone',  caption: 'Nurturing curiosity in our younger learners',                 url: '/mirai_activityroom2_image.jpeg' },
   { cat: 'Classroom Learning', title: 'Smart Technology',        caption: 'Technology-enabled learning with interactive tools',          url: '/mirai_school4_image.jpeg', span: 'wide' },
-
-  /* ── Events (Coming Soon) ────────────────────────────── */
-  // { cat: 'Events', title: 'Student Showcases',         caption: 'Celebrating achievement and talent across all grades',              url: '/mirai_activity_3_image.jpeg', span: 'tall' },
-  // { cat: 'Events', title: 'Cultural Festival',         caption: 'Annual celebrations of global heritage and diversity',              url: '/mirai_activity_4_image.jpeg' },
-  // { cat: 'Events', title: 'Science Symposium',         caption: 'Presenting original research and innovative solutions',               url: '/mirai_activity_5_image.jpeg' },
-  // { cat: 'Events', title: 'Annual Day',                caption: 'Grand stage performances by the Mirai student body',                url: '/mirai_activity_7_image.jpeg' },
-  // { cat: 'Events', title: 'Expert-Led Skill Workshops', caption: 'Interactive sessions focused on developing future-ready skills',     url: '/mirai_activity_8.jpeg' },
-  // { cat: 'Events', title: 'Award Ceremony',            caption: 'Recognising excellence in academics, sports, and arts',             url: '/mirai_activity_9_image.jpeg', span: 'wide' },
 ]
 
 const CATS = ['All', 'Campus', 'Residential Life', 'Sports', 'Classroom Learning', 'Events']
@@ -54,8 +45,17 @@ const catColors = {
   'Events':             { bg: '#2563EB18', color: '#2563EB' },
 }
 
-export default function Gallery() {
-  useSEO(META.gallery, [organizationSchema()])
+export default function Gallery({ images = [] }) {
+  // Merge dynamic images from API with static ones
+  const dynamicPhotos = images.map(img => ({
+    cat: img.category || 'All',
+    title: img.title,
+    caption: img.caption,
+    url: img.image,
+    span: img.is_wide ? 'wide' : img.is_tall ? 'tall' : 'normal'
+  }))
+
+  const photos = [...staticPhotos, ...dynamicPhotos]
 
   const [active, setActive]   = useState('All')
   const [light, setLight]     = useState(null) // index into filtered list
@@ -88,6 +88,11 @@ export default function Gallery() {
 
   return (
     <>
+      <Head>
+        <title>Photo Gallery | Mirai Experiential School</title>
+        <meta name="description" content="Explore life at Mirai through our visual stories — from classroom discovery to campus celebrations." />
+      </Head>
+
       <PageHero
         title="Photo Gallery"
         subtitle="Explore life at Mirai through our visual stories — from classroom discovery to campus celebrations."
@@ -165,9 +170,6 @@ export default function Gallery() {
                   <h4 className="text-white font-display font-800 text-base mb-1"
                     style={{ fontFamily: 'var(--font-display)', fontWeight: 800 }}>{img.title}</h4>
                   <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)' }}>{img.caption}</p>
-                  <div className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                    🔍 Click to preview
-                  </div>
                 </div>
               </div>
             ))}
@@ -196,22 +198,17 @@ export default function Gallery() {
           style={{ background: 'rgba(10,8,6,0.95)', backdropFilter: 'blur(12px)' }}
           onClick={close}>
 
-          {/* Content — stop propagation so clicking image doesn't close */}
           <div className="relative max-w-5xl w-full mx-4 flex flex-col items-center" onClick={e => e.stopPropagation()}>
-
-            {/* Counter */}
             <div className="absolute -top-10 left-0 text-xs font-bold" style={{ color: 'rgba(255,255,255,0.4)', fontFamily: 'var(--font-display)' }}>
               {light + 1} / {filtered.length}
             </div>
 
-            {/* Close */}
             <button onClick={close}
               className="absolute -top-10 right-0 text-white text-2xl transition-opacity hover:opacity-70 font-light"
               style={{ fontFamily: 'var(--font-display)' }}>
               ✕
             </button>
 
-            {/* Image */}
             <img
               src={current.url}
               alt={current.title}
@@ -219,7 +216,6 @@ export default function Gallery() {
               style={{ maxHeight: '75vh', objectFit: 'contain' }}
             />
 
-            {/* Caption */}
             <div className="mt-5 text-center px-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-3"
                 style={{ background: catColors[current.cat]?.bg, color: catColors[current.cat]?.color }}>
@@ -230,7 +226,6 @@ export default function Gallery() {
               <p className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>{current.caption}</p>
             </div>
 
-            {/* Prev / Next */}
             <div className="flex gap-4 mt-6">
               <button onClick={prev}
                 className="px-6 py-3 rounded-full text-sm font-bold transition-all hover:opacity-80"
@@ -243,11 +238,6 @@ export default function Gallery() {
                 Next →
               </button>
             </div>
-          </div>
-
-          {/* Keyboard hint */}
-          <div className="absolute bottom-6 left-0 right-0 text-center text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>
-            ← → to navigate · Esc to close
           </div>
         </div>
       )}
@@ -263,4 +253,3 @@ export default function Gallery() {
     </>
   )
 }
-

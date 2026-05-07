@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { useSEO } from '../hooks/useSEO'
-import { META, organizationSchema } from '../utils/seo'
+import { Head, Link } from '@inertiajs/react'
 import PageHero from '../components/PageHero'
 import SectionHeader from '../components/SectionHeader'
 import CTABanner from '../components/CTABanner'
@@ -77,7 +76,7 @@ const newsItems = [
     category: 'Event',
     title: 'Research Symposium 2026 — Student Innovations on Display',
     excerpt: 'MYP students presented original research projects to faculty, parents, and industry guests, covering topics from climate science to behavioural economics.',
-    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=75&auto=format',
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=85&auto=format',
     featured: false,
   },
 ]
@@ -94,7 +93,6 @@ const CATEGORIES = ['All', 'Achievement', 'Competition', 'Announcement', 'Event'
 const fmt = (d) => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
 
 export default function News() {
-  useSEO(META.news, [organizationSchema()])
   const [active, setActive] = useState('All')
 
   const featured = newsItems.find(n => n.featured)
@@ -102,6 +100,11 @@ export default function News() {
 
   return (
     <>
+      <Head>
+        <title>News & Events | Mirai Experiential School</title>
+        <meta name="description" content="Latest achievements, student competitions, announcements, and upcoming events at Mirai Experiential School." />
+      </Head>
+
       <PageHero
         title="News & Events"
         subtitle="Latest achievements, student competitions, announcements, and upcoming events at Mirai Experiential School."
@@ -131,10 +134,6 @@ export default function News() {
                   {featured.title}
                 </h2>
                 <p className="text-base leading-relaxed mb-8" style={{ color: '#78716C' }}>{featured.excerpt}</p>
-                <div className="flex items-center gap-2 text-sm font-bold transition-colors cursor-pointer"
-                  style={{ color: B }}>
-                  Read Full Story <span>→</span>
-                </div>
               </div>
             </div>
           </div>
@@ -184,22 +183,11 @@ export default function News() {
                     <h3 className="font-display font-800 text-lg leading-snug mb-3"
                       style={{ color: '#1C1917', fontFamily: 'var(--font-display)', fontWeight: 800 }}>{item.title}</h3>
                     <p className="text-sm leading-relaxed mb-5" style={{ color: '#78716C' }}>{item.excerpt}</p>
-                    <div className="flex items-center gap-2 text-xs font-bold cursor-pointer transition-colors"
-                      style={{ color: B }}>
-                      Read Full Story <span>→</span>
-                    </div>
                   </div>
                 </div>
               )
             })}
           </div>
-
-          {rest.length === 0 && (
-            <div className="text-center py-16">
-              <div className="text-5xl mb-4">📭</div>
-              <p className="text-base font-medium" style={{ color: '#78716C' }}>No news in this category yet. Check back soon!</p>
-            </div>
-          )}
         </div>
       </section>
 
@@ -239,4 +227,3 @@ export default function News() {
     </>
   )
 }
-

@@ -179,6 +179,45 @@ def inertia_about(request):
     }
     return render(request, 'About', props)
 
+def inertia_sports(request):
+    return render(request, 'Sports')
+
+def inertia_residential(request):
+    return render(request, 'Residential')
+
+def inertia_campus(request):
+    ctx = {'request': request}
+    props = {
+        'facilities': FacilitySerializer(Facility.objects.filter(is_active=True), many=True, context=ctx).data,
+    }
+    return render(request, 'Campus', props)
+
+def inertia_experiential(request):
+    return render(request, 'Experiential')
+
+def inertia_student_life(request):
+    return render(request, 'StudentLife')
+
+def inertia_global_exposure(request):
+    return render(request, 'GlobalExposure')
+
+def inertia_gallery(request):
+    # Note: SPA used hardcoded photos, but we'll provide the DB images as props too
+    ctx = {'request': request}
+    props = {
+        'images': GalleryImageSerializer(GalleryImage.objects.filter(is_active=True), many=True, context=ctx).data,
+    }
+    return render(request, 'Gallery', props)
+
+def inertia_contact(request):
+    return render(request, 'Contact')
+
+def inertia_student_inquiry(request):
+    return render(request, 'StudentInquiry')
+
+def inertia_news(request):
+    return render(request, 'News')
+
 
 # ── Programs ─────────────────────────────────────────────────────────
 class ProgramListView(generics.ListAPIView):

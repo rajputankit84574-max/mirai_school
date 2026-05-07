@@ -1,5 +1,4 @@
-import { useSEO } from '../hooks/useSEO'
-import { META, organizationSchema } from '../utils/seo'
+import { Head, Link } from '@inertiajs/react'
 import PageHero from '../components/PageHero'
 import CTABanner from '../components/CTABanner'
 import SectionHeader from '../components/SectionHeader'
@@ -40,10 +39,13 @@ const expStats = [
 ]
 
 export default function Experiential() {
-  useSEO(META.experiential, [organizationSchema()])
-
   return (
     <>
+      <Head>
+        <title>Experiential Learning | Mirai Experiential School</title>
+        <meta name="description" content="Discover how Mirai integrates project-based learning, research, and innovation to create future-ready students." />
+      </Head>
+
       <PageHero
         title="Experiential Learning"
         subtitle="We believe the most powerful learning happens when students engage with the world — not just read about it."
@@ -56,16 +58,13 @@ export default function Experiential() {
           <SectionHeader center label="Experiential Framework" title="The Mirai Learning Cycle"
             subtitle="Every unit of learning at Mirai follows a five-stage cycle that transforms curiosity into action." />
 
-          {/* Visual cycle strip */}
           <div className="mt-14 relative">
-            {/* Connector line */}
             <div className="hidden lg:block absolute top-10 left-[10%] right-[10%] h-0.5"
               style={{ background: `linear-gradient(90deg, ${B}40, ${F}, ${B}40)` }} />
 
             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
               {learningCycle.map((item, i) => (
                 <div key={i} className="flex flex-col items-center text-center relative z-10">
-                  {/* Circle node */}
                   <div className="w-20 h-20 rounded-full flex items-center justify-center text-3xl mb-5 shadow-lg ring-4 ring-white"
                     style={{ background: i % 2 === 0
                       ? `linear-gradient(135deg, ${B}, ${B}CC)`
@@ -77,23 +76,9 @@ export default function Experiential() {
                   <h4 className="font-display font-800 text-lg mb-2"
                     style={{ color: '#1C1917', fontFamily: 'var(--font-display)', fontWeight: 800 }}>{item.label}</h4>
                   <p className="text-xs leading-relaxed" style={{ color: '#78716C' }}>{item.desc}</p>
-
-                  {/* Arrow between steps */}
-                  {i < learningCycle.length - 1 && (
-                    <span className="hidden sm:block lg:hidden absolute -right-3 top-8 text-xl" style={{ color: F }}>→</span>
-                  )}
                 </div>
               ))}
             </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-base font-medium" style={{ color: '#44403C' }}>
-              <span style={{ color: B }}>Inquiry</span> → <span style={{ color: F }}>Exploration</span> → <span style={{ color: B }}>Collaboration</span> → <span style={{ color: F }}>Creation</span> → <span style={{ color: B }}>Reflection</span>
-            </p>
-            <p className="text-sm mt-2" style={{ color: '#78716C' }}>
-              This cycle repeats across every subject, every grade — making learning an ongoing, living process.
-            </p>
           </div>
         </div>
       </section>
@@ -139,7 +124,6 @@ export default function Experiential() {
             </div>
           </div>
 
-          {/* PBL project examples */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {pblProjects.map((proj, i) => (
               <div key={i} className="p-8 rounded-2xl border bg-white transition-all hover:shadow-xl hover:-translate-y-1"
@@ -174,59 +158,6 @@ export default function Experiential() {
               </div>
             ))}
           </div>
-
-          {/* Highlight strip */}
-          <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {['Robotics Lab', 'Coding Studio', 'Design Suite', 'Media Broadcast Room'].map((room, i) => (
-              <div key={i} className="text-center py-5 px-4 rounded-2xl"
-                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                <p className="text-sm font-semibold" style={{ color: '#E7E5E4', fontFamily: 'var(--font-display)' }}>{room}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 4.4 Research & Inquiry ───────────────────────────────────── */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="rounded-3xl overflow-hidden aspect-[4/3] relative shadow-2xl">
-              <img src="/mirai_playground4_image.jpeg"
-                alt="Students engaged in academic research and inquiry at Mirai Experiential School"
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(20,10,8,0.5) 0%, transparent 60%)' }} />
-              <div className="absolute bottom-6 left-6 bg-white/95 rounded-2xl px-4 py-3 shadow-lg">
-                <p className="text-xs font-bold" style={{ color: '#1C1917' }}>Annual Research Symposium</p>
-                <p className="text-xs mt-0.5" style={{ color: '#78716C' }}>Each senior student presents original research</p>
-              </div>
-            </div>
-            <div>
-              <div className="section-label mb-4" style={{ display: 'inline-flex' }}>Research & Inquiry</div>
-              <h2 className="font-display font-800 leading-tight mb-5"
-                style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(1.8rem,3vw,2.6rem)', color: '#1C1917' }}>
-                Building Scholars from the Ground Up
-              </h2>
-              <p className="text-base leading-relaxed mb-8" style={{ color: '#78716C' }}>
-                At Mirai, every student is a researcher. From primary students investigating local ecosystems to seniors presenting original studies, inquiry is the engine of every learning experience.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                {[
-                  { icon: '📚', title: 'Academic Research Skills', desc: 'Students learn to source, evaluate, and cite information using recognised academic standards.' },
-                  { icon: '🧠', title: 'Analytical Thinking', desc: 'Data interpretation, logical reasoning, and evidence-based conclusions form the core of every inquiry.' },
-                  { icon: '🔭', title: 'Independent Inquiry', desc: 'Self-directed investigation allows students to pursue topics they are genuinely passionate about.' },
-                ].map((item, i) => (
-                  <div key={i} className="p-6 rounded-2xl text-center transition-all hover:shadow-lg hover:-translate-y-1"
-                    style={{ border: '1.5px solid #F0EDEA', background: 'white' }}>
-                    <div className="text-3xl mb-4">{item.icon}</div>
-                    <h4 className="font-display font-800 text-sm mb-2"
-                      style={{ color: '#1C1917', fontFamily: 'var(--font-display)', fontWeight: 800 }}>{item.title}</h4>
-                    <p className="text-xs leading-relaxed" style={{ color: '#78716C' }}>{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -239,4 +170,3 @@ export default function Experiential() {
     </>
   )
 }
-

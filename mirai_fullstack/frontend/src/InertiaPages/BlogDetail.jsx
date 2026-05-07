@@ -1,7 +1,5 @@
 import { Link, Head } from '@inertiajs/react'
-import { useSEO } from '../hooks/useSEO'
-import { articleSchema, organizationSchema } from '../utils/seo'
-import LoadingSkeleton from '../components/LoadingSkeleton' // Renamed from LoadingSpinner for consistency
+
 
 const B = '#AA4A44', F = '#77966D'
 const RELATED_IMG = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&q=75&auto=format'
@@ -244,14 +242,6 @@ function BlogSkeleton() {
 
 export default function BlogDetail({ post, related = [] }) {
 
-  useSEO(
-    post ? {
-      title: `${post.meta_title || post.title} | Mirai School`,
-      description: post.meta_description || post.excerpt,
-    } : null,
-    [articleSchema(post), organizationSchema()]
-  )
-
   const shareUrl = typeof window !== 'undefined' ? window.location.href : ''
   const shareTitle = post?.title || ''
 
@@ -283,7 +273,7 @@ export default function BlogDetail({ post, related = [] }) {
           className="p-2 rounded-full bg-white text-stone-600 hover:bg-stone-100 transition-all shadow-sm border border-stone-100"
           title="Copy Link"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
         </button>
       </div>
     </div>
@@ -294,13 +284,15 @@ export default function BlogDetail({ post, related = [] }) {
       <div className="text-5xl mb-4">📝</div>
       <h2 className="font-display text-2xl font-bold mb-3" style={{ color: '#1C1917' }}>Post not found</h2>
       <p className="text-sm mb-8" style={{ color: '#A8A29E' }}>This article may have moved or been unpublished.</p>
-      <Link to="/blog" className="btn btn-primary" style={{ textDecoration: 'none' }}>← Back to Blog</Link>
+      <a href="/blog" className="btn btn-primary" style={{ textDecoration: 'none' }}>← Back to Blog</a>
     </div>
   )
 
   return (
     <>
       <Head>
+        <title>{post.meta_title || post.title} | Mirai School Blog</title>
+        <meta name="description" content={post.meta_description || post.excerpt} />
         <meta property="og:title" content={post.meta_title || post.title} />
         <meta property="og:description" content={post.meta_description || post.excerpt} />
         <meta property="og:image" content={post.image} />
@@ -319,9 +311,9 @@ export default function BlogDetail({ post, related = [] }) {
              style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
         <div className="relative max-w-3xl mx-auto px-6">
           <div className="flex items-center justify-center gap-2 mb-5 text-xs" style={{ color: 'rgba(255,255,255,0.45)', fontFamily: 'var(--font-body)' }}>
-            <Link to="/" className="hover:text-white transition-colors">Home</Link>
+            <a href="/" className="hover:text-white transition-colors">Home</a>
             <span>›</span>
-            <Link to="/blog" className="hover:text-white transition-colors">Blog</Link>
+            <a href="/blog" className="hover:text-white transition-colors">Blog</a>
             <span>›</span>
             <span style={{ color: 'rgba(255,255,255,0.85)' }}>{post.title.slice(0, 40)}…</span>
           </div>
@@ -355,17 +347,17 @@ export default function BlogDetail({ post, related = [] }) {
 
           <div className="mt-10 pt-8" style={{ borderTop: '1px solid #F0EDEA' }}>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-bold"
-                    style={{ color: B, fontFamily: 'var(--font-display)' }}>← Back to all posts</Link>
+              <a href="/blog" className="inline-flex items-center gap-2 text-sm font-bold"
+                    style={{ color: B, fontFamily: 'var(--font-display)' }}>← Back to all posts</a>
               <div className="flex gap-3 flex-wrap">
-                <Link to="/programmes" className="btn btn-outline"
+                <a href="/programmes" className="btn btn-outline"
                       style={{ padding: '8px 18px', fontSize: '0.8rem', textDecoration: 'none' }}>
                   Explore IB Programmes
-                </Link>
-                <Link to="/student-inquiry#academic-session-header" className="btn btn-primary"
+                </a>
+                <a href="/student-inquiry#academic-session-header" className="btn btn-primary"
                       style={{ padding: '8px 18px', fontSize: '0.8rem', textDecoration: 'none' }}>
                   Enroll Now →
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -389,7 +381,7 @@ export default function BlogDetail({ post, related = [] }) {
                   <div className="p-5">
                     {r.category && <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: F, fontFamily: 'var(--font-display)' }}>{r.category.name}</div>}
                     <h4 className="font-display font-800 text-base mb-2 leading-snug" style={{ fontFamily: 'var(--font-display)', fontWeight: 800, color: '#1C1917' }}>{r.title}</h4>
-                    <Link to={`/blog/${r.slug}`} className="text-xs font-bold" style={{ color: B, fontFamily: 'var(--font-display)' }}>Read →</Link>
+                    <a href={`/blog/${r.slug}`} className="text-xs font-bold" style={{ color: B, fontFamily: 'var(--font-display)' }}>Read →</a>
                   </div>
                 </div>
               ))}
